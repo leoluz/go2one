@@ -1,4 +1,8 @@
+local map = require("utils").map
+local silent = { silent=true }
 local g = vim.g
+
+-- configs
 g.NERDTreeShowBookmarks = 1
 g.nerdtree_tabs_open_on_gui_startup = 0
 g.NERDTreeQuitOnOpen = 1
@@ -6,6 +10,9 @@ g.NERDTreeMinimalUI = 1
 g.NERDTreeDirArrows = 1
 g.NERDTreeAutoCenter = 1
 g.NERDTreeAutoDeleteBuffer = 1
+
+-- mappings
+map("n", "<leader>q", ":NERDTreeToggle<CR>", silent)
 
 -- TODO rewrite the function bellow in Lua
 --function! IsNERDTreeOpen()

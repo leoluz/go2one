@@ -1,9 +1,12 @@
 local opt = vim.opt
+
+opt.hidden = true -- don't autosave buffers
+opt.updatetime = 100 -- highlight sameids faster
 opt.showmatch = true -- show matching brackets
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
-opt.signcolumn = "yes:3" -- always show the gutter
+opt.signcolumn = "yes" -- always show the gutter
 opt.wrap = false
 opt.clipboard = "unnamed" -- y yy d works with system clipboard
 opt.hlsearch = false
@@ -33,3 +36,6 @@ opt.foldmethod = "indent"
 opt.foldlevel = 999
 opt.autoread = true
 opt.list = true
+opt.mouse = "a"
+opt.background = "dark"
+--vim.cmd [[colorscheme one]]

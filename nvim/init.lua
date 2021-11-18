@@ -1,3 +1,3 @@
-require("settings")
 require("plugins")
+require("settings")
 require("mappings")
