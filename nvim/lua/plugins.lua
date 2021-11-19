@@ -2,10 +2,12 @@ require("packer").startup(function(use)
   -- Packer can manage itself
   use "wbthomason/packer.nvim"
 
+  -- nvim-tree
   use {
-    "scrooloose/nerdtree",
+    "kyazdani42/nvim-tree.lua",
+    requires = "kyazdani42/nvim-web-devicons",
     config = function()
-     require("plugins/nerdtree")
+      require("plugins/nvim-tree")
     end
   }
 
@@ -156,7 +158,7 @@ require("packer").startup(function(use)
 
   -- comment
   use {
-    'numToStr/Comment.nvim',
+    "numToStr/Comment.nvim",
     config = function()
       require("plugins/comment")
     end
