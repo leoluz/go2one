@@ -17,34 +17,34 @@ augroup END
 -- term configurations
 vim.cmd[[
 augroup term
-    autocmd!
-    au TermOpen * setlocal listchars= nonumber norelativenumber signcolumn=no
-    au TermOpen * startinsert
-    au BufEnter,BufWinEnter,WinEnter term://* startinsert
-    au BufLeave term://* stopinsert
+  autocmd!
+  au TermOpen * setlocal listchars= nonumber norelativenumber signcolumn=no
+  au TermOpen * startinsert
+  au BufEnter,BufWinEnter,WinEnter term://* startinsert
+  au BufLeave term://* stopinsert
 augroup END
 ]]
 
 -- lua configurations
 vim.cmd[[
 augroup lua
-    autocmd!
-    au FileType lua setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType lua lua require'cmp'.setup.buffer {
-    \   sources = {
-    \     { name = 'buffer' },
-    \     { name = 'nvim_lua' },
-    \     { name = 'ultisnips' },
-    \     { name = 'nvim_lsp' },
-    \   }
-    \ }
+  autocmd!
+  au FileType lua setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd FileType lua lua require'cmp'.setup.buffer {
+  \   sources = {
+  \     { name = 'buffer' },
+  \     { name = 'nvim_lua' },
+  \     { name = 'ultisnips' },
+  \     { name = 'nvim_lsp' },
+  \   }
+  \ }
 augroup END
 ]]
 
 -- go configurations
 vim.cmd[[
 augroup golang
-    autocmd!
-    au FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+  autocmd!
+  au FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
 augroup END
 ]]
