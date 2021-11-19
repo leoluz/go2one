@@ -2,6 +2,14 @@ require("packer").startup(function(use)
   -- Packer can manage itself
   use "wbthomason/packer.nvim"
 
+  --dashboard
+  use {
+    "glepnir/dashboard-nvim",
+    config = function()
+      require("plugins/dashboard")
+    end
+  }
+
   -- nvim-tree
   use {
     "kyazdani42/nvim-tree.lua",
@@ -10,6 +18,9 @@ require("packer").startup(function(use)
       require("plugins/nvim-tree")
     end
   }
+
+  -- fugitive
+  use { "tpope/vim-fugitive" }
 
   -- themes
   use {
