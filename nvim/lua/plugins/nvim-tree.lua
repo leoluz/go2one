@@ -30,6 +30,8 @@ vim.g.nvim_tree_icons = {
   }
 }
 
+-- need to require "nvim-tree" after setting the global configurations
+-- for it to work properly
 local tree = require("nvim-tree")
 tree.setup{
   update_focused_file = {

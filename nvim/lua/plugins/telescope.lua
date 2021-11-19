@@ -28,5 +28,6 @@ telescope.setup {
 }
 
 map("n", "<C-p>", ":lua require'telescope.builtin'.find_files()<CR>", silent)
-map("n", "<leader>h", ":lua require'telescope.builtin'.help_tags()<CR>", silent)
-map("n", "<leader>f", ":lua require('telescope.builtin').live_grep()<CR>", silent)
+map("n", "<leader>ff", ":lua require'telescope.builtin'.find_files()<CR>", silent)
+map("n", "<leader>fh", ":lua require'telescope.builtin'.help_tags()<CR>", silent)
+map("n", "<leader>fg", ":lua require('telescope.builtin').live_grep()<CR>", silent)

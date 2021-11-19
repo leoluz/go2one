@@ -7,7 +7,7 @@ ENV NVIM_BIN=${NVIM_HOME}/squashfs-root/usr/bin/nvim
 ENV NVIM_CONFIG=${NVIM_HOME}/.config/nvim
 
 # Set the locale
-RUN apt-get update && apt upgrade -y && apt-get install -y ca-certificates locales git curl
+RUN apt-get update && apt upgrade -y && apt-get install -y ca-certificates locales git curl ripgrep fzf
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen
 ENV LANG en_US.UTF-8
