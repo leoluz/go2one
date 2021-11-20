@@ -5,18 +5,14 @@ require("packer").startup(function(use)
   --dashboard
   use {
     "glepnir/dashboard-nvim",
-    config = function()
-      require("plugins/dashboard")
-    end
+    config = function() require("plugins/dashboard") end,
   }
 
   -- nvim-tree
   use {
     "kyazdani42/nvim-tree.lua",
     requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("plugins/nvim-tree")
-    end
+    config = function() require("plugins/nvim-tree") end,
   }
 
   -- fugitive
@@ -25,9 +21,7 @@ require("packer").startup(function(use)
   -- themes
   use {
     "navarasu/onedark.nvim",
-    config = function()
-      require("plugins/onedark")
-    end
+    config = function() require("plugins/onedark") end,
   }
   use {
     "rakr/vim-one",
@@ -35,9 +29,7 @@ require("packer").startup(function(use)
   use {
     disable = true,
     "olimorris/onedarkpro.nvim",
-    config = function()
-      require("plugins/onedarkpro")
-    end
+    config = function() require("plugins/onedarkpro") end,
   }
 
   -- vsnips
@@ -49,9 +41,7 @@ require("packer").startup(function(use)
   use {
     "hrsh7th/nvim-cmp",
     --after = "nvim-lspconfig",
-    config = function()
-      require("plugins/cmp")
-    end
+    config = function() require("plugins/cmp") end,
   }
   use { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }
   use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
@@ -61,9 +51,7 @@ require("packer").startup(function(use)
   use {
     "neovim/nvim-lspconfig",
     after = "cmp-nvim-lsp",
-    config = function()
-      require("plugins/lspconfig")
-    end
+    config = function() require("plugins/lspconfig") end,
   }
 
   -- treesitter
@@ -71,9 +59,7 @@ require("packer").startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSInstallSync go",
     branch = "0.5-compat",
-    config = function()
-      require("plugins/treesitter")
-    end
+    config = function() require("plugins/treesitter") end,
   }
   use {
     "nvim-treesitter/playground",
@@ -89,41 +75,31 @@ require("packer").startup(function(use)
     "nvim-telescope/telescope-fzf-native.nvim",
     run = "make",
     after = "telescope.nvim",
-    config = function()
-      require("plugins/telescope-fzf-native")
-    end
+    config = function() require("plugins/telescope-fzf-native") end,
   }
   use {
     "gbrlsnchs/telescope-lsp-handlers.nvim",
     after = "telescope.nvim",
-    config = function()
-      require("plugins/telescope-lsp-handlers")
-    end
+    config = function() require("plugins/telescope-lsp-handlers") end,
   }
   use {
     "nvim-telescope/telescope.nvim",
     requires = { {"nvim-lua/plenary.nvim"} },
-    config = function()
-      require("plugins/telescope")
-    end
+    config = function() require("plugins/telescope") end,
   }
 
   -- lualine
   use {
     "nvim-lualine/lualine.nvim",
     requires = {"kyazdani42/nvim-web-devicons", opt = true},
-    config = function()
-      require("plugins/lualine")
-    end
+    config = function() require("plugins/lualine") end,
   }
 
   -- bufferline
   use {
     "akinsho/bufferline.nvim",
     requires = {"kyazdani42/nvim-web-devicons", opt = true},
-    config = function()
-      require("plugins/bufferline")
-    end
+    config = function() require("plugins/bufferline") end,
   }
 
   -- gitsigns
@@ -131,48 +107,36 @@ require("packer").startup(function(use)
     "lewis6991/gitsigns.nvim",
     requires = { {"nvim-lua/plenary.nvim"} },
     tag = "release", -- To use the latest release
-    config = function()
-      require("plugins/gitsigns")
-    end
+    config = function() require("plugins/gitsigns") end,
   }
 
   -- autopairs
   use {
     "windwp/nvim-autopairs",
-    config = function()
-      require("plugins/nvim-autopairs")
-    end
+    config = function() require("plugins/nvim-autopairs") end,
   }
 
   -- debug
   use {
     "mfussenegger/nvim-dap",
-    config = function()
-      require("plugins/nvim-dap")
-    end
+    config = function() require("plugins/nvim-dap") end,
   }
   use {
     "rcarriga/nvim-dap-ui",
     after = "nvim-dap",
-    config = function()
-      require("plugins/nvim-dap-ui")
-    end
+    config = function() require("plugins/nvim-dap-ui") end,
   }
 
   -- go
   use {
     "leoluz/nvim-dap-go",
-    config = function()
-      require("plugins/nvim-dap-go")
-    end
+    config = function() require("plugins/nvim-dap-go") end,
   }
 
   -- comment
   use {
     "numToStr/Comment.nvim",
-    config = function()
-      require("plugins/comment")
-    end
+    config = function() require("plugins/comment") end,
   }
 
 end)
