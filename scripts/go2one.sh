@@ -66,6 +66,15 @@ reinstall() {
     install
 }
 
+uninstall() {
+    if [ -d $GO2ONE_HOME ]; then
+        rm -rf $GO2ONE_HOME
+    fi
+    if [ -f "/usr/local/bin/go2one" ]; then
+        rm /usr/local/bin/go2one
+    fi
+}
+
 verify_install() {
     if [ ! -d "$GO2ONE_HOME" ] ||
        [ ! -d "$GO2ONE_HOME/go2one.git" ] ||
@@ -82,14 +91,15 @@ usage() {
    echo
    echo "Syntax: go2one [options] [command]"
    echo
-   echo "To start neovim just run go2one."
+   echo "To start neovim just run go2one with no command."
    echo
    echo "options:"
    echo "  -h           show this help."
    echo
    echo "commands:"
-   echo "  install      will install go2one under GO2ONE_HOME (default #HOME/.config/go2one)."
-   echo "  update       will update go2one installation."
+   echo "  install      install go2one under GO2ONE_HOME (default #HOME/.config/go2one)."
+   echo "  update       update go2one installation."
+   echo "  uninstall    remove go2one installation"
    echo
 }
 
@@ -118,6 +128,10 @@ case $parm1 in
     update)
         echo "Updating go2one..."
         reinstall
+        ;;
+    uninstall)
+        echo "Uninstalling go2one..."
+        uninstall
         ;;
     *)
         verify_install
