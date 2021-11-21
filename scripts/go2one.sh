@@ -13,7 +13,7 @@ abort() {
 }
 
 # gte greater-than-equal will validate the two version arguments passed and returns
-# true if the first is greater or equal the second. Will return false otherwise.
+# true if the first is greater or equal than the second. Will return false otherwise.
 gte() {
     # Strip 'v' from version if it is the fist char
     currentver=$(echo "$1" | sed 's/^v//')
@@ -71,7 +71,7 @@ verify_install() {
        [ ! -d "$GO2ONE_HOME/go2one.git" ] ||
        [ ! -d "$DATA_HOME" ] ||
        [ ! -d "$PACKER_HOME" ]; then
-        abort "Go2one installation not found or corrupted. Please run 'go2one reinstall' to fix it."
+        abort "Go2one installation not found or corrupted. Please run 'go2one update' to fix it."
     fi
 }
 
