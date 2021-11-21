@@ -97,7 +97,7 @@ usage() {
    echo "  -h           show this help."
    echo
    echo "commands:"
-   echo "  install      install go2one under GO2ONE_HOME (default #HOME/.config/go2one)."
+   echo "  install      install go2one under GO2ONE_HOME (default \$HOME/.config/go2one)."
    echo "  update       update go2one installation."
    echo "  uninstall    remove go2one installation"
    echo
@@ -135,6 +135,6 @@ case $parm1 in
         ;;
     *)
         verify_install
-        eval $NVIM_CMD
+        eval $NVIM_CMD $@
         ;;
 esac
