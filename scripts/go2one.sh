@@ -71,7 +71,7 @@ uninstall() {
         rm -rf $GO2ONE_HOME
     fi
     if [ -f "/usr/local/bin/go2one" ]; then
-        rm /usr/local/bin/go2one
+        sudo rm /usr/local/bin/go2one
     fi
 }
 
