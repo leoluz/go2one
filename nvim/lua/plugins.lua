@@ -1,4 +1,8 @@
-require("packer").startup(function(use)
+local packer = require("packer")
+-- packer.init{
+--   max_jobs = 3,
+-- }
+packer.startup(function(use)
   -- Packer can manage itself
   use "wbthomason/packer.nvim"
 
@@ -30,6 +34,11 @@ require("packer").startup(function(use)
     disable = true,
     "olimorris/onedarkpro.nvim",
     config = function() require("plugins/onedarkpro") end,
+  }
+  use {
+    "catppuccin/nvim",
+    as = "catppuccin",
+    config = function() require("plugins/catppuccin") end,
   }
 
   -- vsnips

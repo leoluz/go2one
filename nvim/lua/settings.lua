@@ -40,4 +40,4 @@ opt.mouse = "a"
 opt.background = "dark"
 opt.listchars:append({trail = '·', eol = '↩', tab = '› '})
 
---vim.cmd [[colorscheme one]]
+-- vim.cmd [[colorscheme catppuccin]]
