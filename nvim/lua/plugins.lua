@@ -125,6 +125,12 @@ packer.startup(function(use)
     config = function() require("plugins/nvim-autopairs") end,
   }
 
+  -- vim-surround
+  use {
+    "tpope/vim-surround",
+    "tpope/vim-repeat",
+  }
+
   -- debug
   use {
     "mfussenegger/nvim-dap",
