@@ -21,7 +21,7 @@ Go2one was created for someone who:
 
 * is curious about Neovim new features but wants to keep their current configuration files untouched.
 * is curious about one specific plugin and wants to see it in action before spending time configuring it.
-* wants quickly try IDE features with modern technology ([LSP][1], [Treesitter][2], [DAP][3], etc) with zero configuration required.
+* wants to quickly try running Neovim with IDE features with modern technologies ([LSP][1], [Treesitter][2], [DAP][3], etc) with zero configuration required.
 
 ## Features
 
