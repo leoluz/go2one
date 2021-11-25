@@ -2,6 +2,15 @@
 
 A text editor for developers of the 21st century.
 
+---
+
+* [Goal](goal)
+* [Motivation](motivation)
+* [Features](features)
+* [Installation](installation)
+    * [Container based](container-based)
+    * [Native install](native-install)
+
 ## Goal
 
 This project aims to provide a non intrusive Neovim configuration for Go development. The idea is that you can try this setup not having to touch your current Vim/Neovim configuration files.
@@ -31,7 +40,7 @@ and more..
 
 Go2one provides two different installation methods:
 
-### 1. Container based
+### Container based
 
 **Pre-reqs**
 - Docker
@@ -42,7 +51,7 @@ Just run the following command in the folder having the files you want to edit:
 
     docker run --rm -it -v$(PWD):/home/nvim/work leoluz/go2one:latest
 
-### 2. Native install
+### Native install
 
 **Pre-reqs**
 
