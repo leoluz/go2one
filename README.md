@@ -4,12 +4,12 @@ A text editor for developers of the 21st century.
 
 ---
 
-* [Goal](goal)
-* [Motivation](motivation)
-* [Features](features)
-* [Installation](installation)
-    * [Container based](container-based)
-    * [Native install](native-install)
+* [Goal](#goal)
+* [Motivation](#motivation)
+* [Features](#features)
+* [Installation](#installation)
+    * [Container based](#container-based)
+    * [Native install](#native-install)
 
 ## Goal
 
