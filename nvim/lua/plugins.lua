@@ -125,6 +125,12 @@ packer.startup(function(use)
     config = function() require("plugins/nvim-autopairs") end,
   }
 
+  -- vim-surround
+  use {
+    "tpope/vim-surround",
+    "tpope/vim-repeat",
+  }
+
   -- debug
   use {
     "mfussenegger/nvim-dap",
@@ -146,6 +152,12 @@ packer.startup(function(use)
   use {
     "numToStr/Comment.nvim",
     config = function() require("plugins/comment") end,
+  }
+
+  -- marks
+  use {
+    "chentau/marks.nvim",
+    config = function() require("plugins/marks") end,
   }
 
 end)

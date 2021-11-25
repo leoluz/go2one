@@ -38,6 +38,11 @@ tree.setup{
     enable      = true,
     update_cwd  = false,
   },
+  update_to_buf_dir = {
+    enable = true,
+    auto_open = false,
+  },
+  auto_close = true,
 }
 
 map("n", "<leader>q", ":NvimTreeToggle<CR>", silent)

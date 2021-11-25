@@ -6,7 +6,7 @@ opt.showmatch = true -- show matching brackets
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
-opt.signcolumn = "yes" -- always show the gutter
+opt.signcolumn = "auto:9" -- auto show the gutter with max size
 opt.wrap = false
 opt.clipboard = "unnamed" -- y yy d works with system clipboard
 opt.hlsearch = false
@@ -39,5 +39,3 @@ opt.list = true
 opt.mouse = "a"
 opt.background = "dark"
 opt.listchars:append({trail = '·', eol = '↩', tab = '› '})
-
--- vim.cmd [[colorscheme catppuccin]]
