@@ -19,9 +19,9 @@ This project aims to provide a non intrusive Neovim configuration for Go develop
 
 Go2one was created for someone who:
 
-* is curious about the new features added in Neovim but for some reason want to keep their current configuration files untouched.
-* is curious about one specific plugin and wants to see it in action before spending time configuring it in your setup.
-* wants to try IDE features with modern technology ([LSP][1], [Treesitter][2], [DAP][3], etc) with zero configuration required.
+* is curious about Neovim new features but wants to keep their current configuration files untouched.
+* is curious about one specific plugin and wants to see it in action before spending time configuring it.
+* wants quickly try IDE features with modern technology ([LSP][1], [Treesitter][2], [DAP][3], etc) with zero configuration required.
 
 ## Features
 
