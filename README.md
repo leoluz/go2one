@@ -1,4 +1,4 @@
-# go2one
+# Go2one
 
 A text editor for developers of the 21st century.
 
@@ -29,15 +29,31 @@ and more..
 
 ## Installation
 
-### Docker
+Go2one provides two different installation methods:
+
+1. Container based: nothing is installed in your computer. You just need docker. Keep in mind that for larger code bases, this method is going to be much slower than native installation
+1. Native installation: will use your current neovim with isolated configuration files. This won't affect your existing Vim/Neovim setup. This method will require a few tools to be preinstalled in your laptop. See the doc bellow for more details.
+
+### Container
 
 #### Pre-reqs
+
+- Docker
+
+#### How
+
+Just run the following command in the folder having the files you want to edit:
+
+    docker run --rm -it -v$(PWD):/home/nvim/work leoluz/go2one:latest
 
 ### Native
 
+
 #### Pre-reqs
 
-## Contributing
+#### How
+
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/leoluz/go2one/main/scripts/install.sh)"
 
 [1]: https://microsoft.github.io/language-server-protocol/ "Language Server Protocol"
 [2]: https://tree-sitter.github.io/tree-sitter/ "Treesitter"
