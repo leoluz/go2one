@@ -31,27 +31,29 @@ and more..
 
 Go2one provides two different installation methods:
 
-1. Container based: nothing is installed in your computer. You just need docker. Keep in mind that for larger code bases, this method is going to be much slower than native installation
-1. Native installation: will use your current neovim with isolated configuration files. This won't affect your existing Vim/Neovim setup. This method will require a few tools to be preinstalled in your laptop. See the doc bellow for more details.
+### 1. Container
 
-### Container
-
-#### Pre-reqs
-
+**Pre-reqs**
 - Docker
 
-#### How
+Nothing is installed in your computer. Keep in mind that this method is going to have much slower IO with than native installation.
 
 Just run the following command in the folder having the files you want to edit:
 
     docker run --rm -it -v$(PWD):/home/nvim/work leoluz/go2one:latest
 
-### Native
+### 2. Native
 
+**Pre-reqs**
 
-#### Pre-reqs
+- [Neovim][20]: 0.5.1 
+- [Go][15]: SDK for Go
+- [delve][16]: for debugging Go projects
+- [gopls][17]: LSP server for Go
+- [fzf][18]: Fuzzy search of filesystem
+- [ripgrep][19]: Live grep project file
 
-#### How
+Will use your current Neovim installation with isolated configuration files. This won't affect your existing Vim/Neovim setup.
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/leoluz/go2one/main/scripts/install.sh)"
 
@@ -69,3 +71,9 @@ Just run the following command in the folder having the files you want to edit:
 [12]: https://github.com/akinsho/bufferline.nvim "bufferline"
 [13]: https://github.com/mfussenegger/nvim-dap "nvim-dap"
 [14]: https://github.com/leoluz/nvim-dap-go "dap-go"
+[15]: https://go.dev/ "go"
+[16]: https://github.com/go-delve/delve "delve"
+[17]: https://pkg.go.dev/golang.org/x/tools/gopls#readme-installation "gopls"
+[18]: https://github.com/junegunn/fzf "fzf"
+[19]: https://github.com/BurntSushi/ripgrep#installation "ripgrep"
+[20]: https://neovim.io/ "neovim"
