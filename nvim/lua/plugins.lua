@@ -148,4 +148,10 @@ packer.startup(function(use)
     config = function() require("plugins/comment") end,
   }
 
+  -- marks
+  use {
+    "chentau/marks.nvim",
+    config = function() require("plugins/marks") end,
+  }
+
 end)
