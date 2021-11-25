@@ -69,7 +69,7 @@ To install `go2one` just run the command bellow:
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/leoluz/go2one/main/scripts/install.sh)"
 
-Once the installation is concluded just run `go2one` the same way as you would run `nvim`.
+Once the installation is concluded just run the `go2one` command to start the sandboxed Neovim.
 
 See `go2one -h` for additional commands about how to update or uninstall `go2one`.
 
