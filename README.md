@@ -4,7 +4,7 @@ A text editor for developers of the 21st century.
 
 ## Goal
 
-This project aims to provide a non intrusive Neovim configuration for Go development. The idea is that you can try this setup not having touch your current Vim/Neovim configuration files.
+This project aims to provide a non intrusive Neovim configuration for Go development. The idea is that you can try this setup not having to touch your current Vim/Neovim configuration files.
 
 ## Motivation
 
@@ -31,7 +31,7 @@ and more..
 
 Go2one provides two different installation methods:
 
-### 1. Container
+### 1. Container based
 
 **Pre-reqs**
 - Docker
@@ -42,7 +42,7 @@ Just run the following command in the folder having the files you want to edit:
 
     docker run --rm -it -v$(PWD):/home/nvim/work leoluz/go2one:latest
 
-### 2. Native
+### 2. Native install
 
 **Pre-reqs**
 
@@ -54,8 +54,15 @@ Just run the following command in the folder having the files you want to edit:
 - [ripgrep][19]: Live grep project file
 
 Will use your current Neovim installation with isolated configuration files. This won't affect your existing Vim/Neovim setup.
+This method will install the script `go2one` in your path (`/usr/local/bin`). This script will be responsible to manage `go2one` configuration files and starting Neovim in a sandbox. All `go2one` related configuration files will be created in `$HOME/.config/go2one`. No other file will be created outside of this folder.
+
+To install `go2one` just run the command bellow:
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/leoluz/go2one/main/scripts/install.sh)"
+
+Once the installation is concluded just run `go2one` the same way as you would run `nvim`.
+
+See `go2one -h` for additional commands about how to update or uninstall `go2one`.
 
 [1]: https://microsoft.github.io/language-server-protocol/ "Language Server Protocol"
 [2]: https://tree-sitter.github.io/tree-sitter/ "Treesitter"
