@@ -42,7 +42,7 @@ Go2one provides two different installation methods:
 
 ### Container based
 
-Nothing is installed in your computer. Keep in mind that this method is going to have much slower IO with than native installation.
+Nothing is installed in your computer. Keep in mind that this method is going to have much slower IO compared with the native installation.
 
 **Pre-reqs**
 - Docker
