@@ -42,16 +42,19 @@ Go2one provides two different installation methods:
 
 ### Container based
 
+Nothing is installed in your computer. Keep in mind that this method is going to have much slower IO with than native installation.
+
 **Pre-reqs**
 - Docker
-
-Nothing is installed in your computer. Keep in mind that this method is going to have much slower IO with than native installation.
 
 Just run the following command in the folder having the files you want to edit:
 
     docker run --rm -it -v$(PWD):/home/nvim/work leoluz/go2one:latest
 
 ### Native install
+
+Will use your current Neovim installation with isolated configuration files. This won't affect your existing Vim/Neovim setup.
+This method will install the script `go2one` in your path (`/usr/local/bin`). This script will be responsible to manage `go2one` configuration files and starting Neovim in a sandbox. All `go2one` related configuration files will be created in `$HOME/.config/go2one`. No other file will be created outside of this folder.
 
 **Pre-reqs**
 
@@ -61,9 +64,6 @@ Just run the following command in the folder having the files you want to edit:
 - [gopls][17]: LSP server for Go
 - [fzf][18]: Fuzzy search of filesystem
 - [ripgrep][19]: Live grep project file
-
-Will use your current Neovim installation with isolated configuration files. This won't affect your existing Vim/Neovim setup.
-This method will install the script `go2one` in your path (`/usr/local/bin`). This script will be responsible to manage `go2one` configuration files and starting Neovim in a sandbox. All `go2one` related configuration files will be created in `$HOME/.config/go2one`. No other file will be created outside of this folder.
 
 To install `go2one` just run the command bellow:
 
