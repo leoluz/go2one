@@ -1,7 +1,6 @@
 local catppuccin = require("catppuccin")
 local cp = require("catppuccin.core.color_palette")
 
--- configure it
 catppuccin.setup(
 {
   transparent_background = true,

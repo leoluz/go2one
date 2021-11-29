@@ -55,7 +55,8 @@ install() {
         git clone -q --depth 1 https://github.com/wbthomason/packer.nvim $PACKER_HOME
     fi
 
-    cmd="$NVIM_CMD --headless -c 'autocmd User PackerComplete quitall' +PackerSync"
+    cmd="$NVIM_CMD --headless -c 'autocmd User PackerComplete quitall' +PackerInstall"
+    cmd="$NVIM_CMD --headless -c 'autocmd User PackerCompileDone quitall' +PackerCompile"
     eval $cmd
 }
 
