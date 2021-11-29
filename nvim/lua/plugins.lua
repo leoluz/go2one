@@ -81,19 +81,14 @@ packer.startup(function(use)
 
   -- telescope
   use {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    run = "make",
-    after = "telescope.nvim",
-    config = function() require("plugins/telescope-fzf-native") end,
-  }
-  use {
-    "gbrlsnchs/telescope-lsp-handlers.nvim",
-    after = "telescope.nvim",
-    config = function() require("plugins/telescope-lsp-handlers") end,
-  }
-  use {
     "nvim-telescope/telescope.nvim",
-    requires = { {"nvim-lua/plenary.nvim"} },
+    requires = { 
+      {"nvim-lua/plenary.nvim"},
+      {"gbrlsnchs/telescope-lsp-handlers.nvim"},
+      {"nvim-telescope/telescope-fzf-native.nvim",
+        run = "make", 
+      },
+    },
     config = function() require("plugins/telescope") end,
   }
 

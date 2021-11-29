@@ -14,7 +14,7 @@ telescope.setup {
   },
   extensions = {
     fzf = {
-      fuzzy = true,
+      fuzzy = false,
       override_generic_sorter = true,
       override_file_sorter = true,
       case_mode = "smart_case",
@@ -26,6 +26,8 @@ telescope.setup {
     },
   },
 }
+telescope.load_extension("fzf")
+telescope.load_extension('lsp_handlers')
 
 map("n", "<C-p>", ":lua require'telescope.builtin'.find_files()<CR>", silent)
 map("n", "<leader>ff", ":lua require'telescope.builtin'.find_files()<CR>", silent)
