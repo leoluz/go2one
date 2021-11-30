@@ -42,7 +42,6 @@ tree.setup{
     enable = true,
     auto_open = false,
   },
-  auto_close = true,
 }
 
 map("n", "<leader>q", ":NvimTreeToggle<CR>", silent)
