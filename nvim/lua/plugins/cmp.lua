@@ -40,7 +40,7 @@ end
 
 cmp.setup({
   completion = {
-    keyword_length = 3,
+    keyword_length = 1,
   },
   snippet = {
     expand = function(args)

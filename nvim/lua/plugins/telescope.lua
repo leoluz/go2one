@@ -29,6 +29,7 @@ telescope.setup {
 }
 telescope.load_extension("fzf")
 telescope.load_extension('lsp_handlers')
+telescope.load_extension('gh')
 
 map("n", "<C-p>", ":lua require'telescope.builtin'.find_files()<CR>", silent)
 map("n", "<leader>ff", ":lua require'telescope.builtin'.find_files()<CR>", silent)

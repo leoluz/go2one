@@ -27,11 +27,18 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
-vim.fn.sign_define("LspDiagnosticsSignError", {text="✖", texthl="LspDiagnosticsSignError", linehl="", numhl=""})
-vim.fn.sign_define("LspDiagnosticsSignWarning", {text="⚠", texthl="LspDiagnosticsSignWarning", linehl="", numhl=""})
-vim.fn.sign_define("LspDiagnosticsSignInformation", {text="I", texthl="LspDiagnosticsSignInformation", linehl="", numhl=""})
-vim.fn.sign_define("LspDiagnosticsSignHint", {text="H", texthl="LspDiagnosticsSignHint", linehl="", numhl=""})
+vim.fn.sign_define("LspDiagnosticsSignError", {text="", texthl="LspDiagnosticsSignError", linehl="", numhl=""})
+vim.fn.sign_define("LspDiagnosticsSignWarning", {text="", texthl="LspDiagnosticsSignWarning", linehl="", numhl=""})
+vim.fn.sign_define("LspDiagnosticsSignInformation", {text="", texthl="LspDiagnosticsSignInformation", linehl="", numhl=""})
+vim.fn.sign_define("LspDiagnosticsSignHint", {text="ﯦ", texthl="LspDiagnosticsSignHint", linehl="", numhl=""})
 
+vim.fn.sign_define("DiagnosticSignError", {text="", texthl="DiagnosticSignError", linehl="", numhl=""})
+vim.fn.sign_define("DiagnosticSignWarn", {text="", texthl="DiagnosticSignWarn", linehl="", numhl=""})
+vim.fn.sign_define("DiagnosticSignInfo", {text="", texthl="DiagnosticSignInfo", linehl="", numhl=""})
+vim.fn.sign_define("DiagnosticSignHint", {text="ﯦ", texthl="DiagnosticSignHint", linehl="", numhl=""})
+
+--
+-- gopls setup
 nvim_lsp.gopls.setup{
   on_attach = on_attach,
   capabilities = capabilities,
@@ -44,6 +51,40 @@ nvim_lsp.gopls.setup{
   settings = {
     gopls = {
       usePlaceholders = true, --enables placeholders for function parameters or struct fields in completion responses
+    },
+  },
+}
+
+--
+-- sunmeko setup
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+require'lspconfig'.sumneko_lua.setup {
+  -- assumes the binary can be found in $PATH
+  cmd = { "lua-language-server" },
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = runtime_path,
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
     },
   },
 }

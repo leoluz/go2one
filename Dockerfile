@@ -1,6 +1,6 @@
 FROM golang:1.17.3-bullseye
 
-ARG NVIM_VERSION=0.5.1
+ARG NVIM_VERSION=0.6.0
 ENV DEBIAN_FRONTEND=noninteractive
 ENV NVIM_HOME=/home/nvim
 ENV NVIM_BIN=${NVIM_HOME}/squashfs-root/usr/bin/nvim
