@@ -3,6 +3,7 @@ set -euo pipefail
 
 NVIM_MIN_VERSION="v0.5.1"
 GO2ONE_HOME=${GO2ONE_HOME:-$HOME/.config/go2one}
+GO2ONE_BIN="/usr/local/bin/go2one"
 DATA_HOME="$GO2ONE_HOME/data"
 PACKER_HOME="$DATA_HOME/nvim/site/pack/packer/start/packer.nvim"
 NVIM_CMD="XDG_CONFIG_HOME=$GO2ONE_HOME/go2one.git XDG_DATA_HOME=$DATA_HOME nvim"
@@ -55,9 +56,9 @@ install() {
         git clone -q --depth 1 https://github.com/wbthomason/packer.nvim $PACKER_HOME
     fi
 
-    cmd="$NVIM_CMD --headless -c 'autocmd User PackerComplete quitall' +PackerInstall"
-    cmd="$NVIM_CMD --headless -c 'autocmd User PackerCompileDone quitall' +PackerCompile"
+    cmd="$NVIM_CMD --headless -c 'autocmd User PackerComplete quitall' +PackerSync"
     eval $cmd
+    echo
 }
 
 reinstall() {
@@ -65,6 +66,22 @@ reinstall() {
         rm -rf $GO2ONE_HOME
     fi
     install
+    update_script
+}
+
+update_script() {
+    if [ -f $GO2ONE_BIN ] || [ -L $GO2ONE_BIN ]; then
+        rm $GO2ONE_BIN
+        ln -s $GO2ONE_HOME/go2one.git/scripts/go2one.sh $GO2ONE_BIN
+    fi
+}
+
+update() {
+    if [ -d $GO2ONE_HOME/go2one.git ]; then
+        rm -rf $GO2ONE_HOME/go2one.git
+    fi
+    install
+    update_script
 }
 
 uninstall() {
@@ -100,6 +117,7 @@ usage() {
    echo "commands:"
    echo "  install      install go2one under GO2ONE_HOME (default \$HOME/.config/go2one)."
    echo "  update       update go2one installation."
+   echo "  reinstall    reinstall go2one. Data files will be deleted"
    echo "  uninstall    remove go2one installation"
    echo
 }
@@ -128,6 +146,10 @@ case $parm1 in
         ;;
     update)
         echo "Updating go2one..."
+        update
+        ;;
+    reinstall)
+        echo "Reinstalling go2one..."
         reinstall
         ;;
     uninstall)
