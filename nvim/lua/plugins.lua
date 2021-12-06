@@ -56,10 +56,13 @@ packer.startup(function(use)
   use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
   use { "hrsh7th/cmp-vsnip", after = "nvim-cmp" }
 
+  -- lua-dev
+  use { "folke/lua-dev.nvim" }
+
   -- lsp-config
   use {
     "neovim/nvim-lspconfig",
-    after = "cmp-nvim-lsp",
+    after = {"cmp-nvim-lsp", "lua-dev.nvim" },
     config = function() require("plugins/lspconfig") end,
   }
 
