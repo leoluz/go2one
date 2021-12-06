@@ -1,6 +1,5 @@
 local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local luadev = require("lua-dev")
 
 local on_attach = function()
   vim.api.nvim_set_keymap("n", "<Leader>o", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", {noremap = true, silent = true})
@@ -73,11 +72,26 @@ else
     print("Unsupported OS for sumneko")
 end
 
-luadev.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  lspconfig = {
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+lspconfig.sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-  },
-})
-lspconfig.sumneko_lua.setup(luadev)
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+                path = runtime_path,
+            },
+            diagnostics = {
+                globals = {'vim'}
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+            }
+        }
+    }
+}

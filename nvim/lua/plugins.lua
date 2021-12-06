@@ -56,13 +56,10 @@ packer.startup(function(use)
   use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
   use { "hrsh7th/cmp-vsnip", after = "nvim-cmp" }
 
-  -- lua-dev
-  use { "folke/lua-dev.nvim" }
-
   -- lsp-config
   use {
     "neovim/nvim-lspconfig",
-    after = {"cmp-nvim-lsp", "lua-dev.nvim" },
+    after = {"cmp-nvim-lsp"},
     config = function() require("plugins/lspconfig") end,
   }
 
@@ -85,11 +82,11 @@ packer.startup(function(use)
   -- telescope
   use {
     "nvim-telescope/telescope.nvim",
-    requires = { 
+    requires = {
       {"nvim-lua/plenary.nvim"},
       {"gbrlsnchs/telescope-lsp-handlers.nvim"},
       {"nvim-telescope/telescope-fzf-native.nvim",
-        run = "make", 
+        run = "make",
       },
       {"nvim-telescope/telescope-github.nvim"},
     },
