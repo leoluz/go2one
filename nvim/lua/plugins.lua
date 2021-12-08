@@ -20,7 +20,9 @@ packer.startup(function(use)
   }
 
   -- fugitive
-  use { "tpope/vim-fugitive" }
+  use { "tpope/vim-fugitive",
+    config = function() require("plugins/fugitive") end,
+  }
 
   -- themes
   use {
