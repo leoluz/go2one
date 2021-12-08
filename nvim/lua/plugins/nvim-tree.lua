@@ -34,6 +34,7 @@ vim.g.nvim_tree_icons = {
 -- for it to work properly
 local tree = require("nvim-tree")
 tree.setup{
+  update_cwd = true,
   update_focused_file = {
     enable      = true,
     update_cwd  = false,

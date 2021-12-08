@@ -42,3 +42,4 @@ map("n", "<leader>fj", ":lua require('telescope.builtin').git_bcommits()<CR>", s
 map("n", "<leader>fd", ":lua require('telescope.builtin').lsp_workspace_diagnostics()<CR>", silent)
 map("n", "<leader>fs", ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>", silent)
 map("n", "<leader>fb", ":lua require('telescope.builtin').file_browser()<CR>", silent)
+map("n", "<leader>f;", ":lua require('telescope').extensions.repo.list()<CR>", silent)
