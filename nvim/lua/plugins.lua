@@ -89,8 +89,14 @@ packer.startup(function(use)
         run = "make",
       },
       {"nvim-telescope/telescope-github.nvim"},
+      {"cljoly/telescope-repo.nvim"},
     },
     config = function() require("plugins/telescope") end,
+  }
+
+  -- rooter
+  use {
+    "airblade/vim-rooter"
   }
 
   -- lualine

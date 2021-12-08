@@ -56,6 +56,7 @@ This method will create two entries in your filesystem:
 - [gopls][17]: LSP server for Go
 - [fzf][18]: Fuzzy search of filesystem
 - [ripgrep][19]: Live grep project file
+- [fd][22]: Quickly find repos in the filesystem
 
 To install `go2one` just run the command bellow:
 
@@ -100,3 +101,4 @@ Just run the following command in the folder having the files you want to edit:
 [19]: https://github.com/BurntSushi/ripgrep#installation "ripgrep"
 [20]: https://neovim.io/ "neovim"
 [21]: https://github.com/docker/for-mac/issues/1592 "docker io issues"
+[22]: https://github.com/sharkdp/fd "fd"

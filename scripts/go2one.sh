@@ -47,7 +47,7 @@ install() {
         mkdir -p $GO2ONE_HOME
     fi
     if [ ! -d "$GO2ONE_HOME/go2one.git" ]; then
-        git clone -q --depth 1 https://github.com/leoluz/go2one.git $GO2ONE_HOME/go2one.git
+        git clone -q https://github.com/leoluz/go2one.git $GO2ONE_HOME/go2one.git
     fi
     if [ ! -d "$DATA_HOME" ]; then
         mkdir $DATA_HOME
@@ -70,15 +70,18 @@ reinstall() {
 }
 
 update_script() {
-    if [ -f $GO2ONE_BIN ] || [ -L $GO2ONE_BIN ]; then
+    if [ -f $GO2ONE_BIN ]; then
         rm $GO2ONE_BIN
+    fi
+
+    if [ ! -L $GO2ONE_BIN ]; then
         ln -s $GO2ONE_HOME/go2one.git/scripts/go2one.sh $GO2ONE_BIN
     fi
 }
 
 update() {
     if [ -d $GO2ONE_HOME/go2one.git ]; then
-        rm -rf $GO2ONE_HOME/go2one.git
+        GIT_DIR=$GO2ONE_HOME/go2one.git/.git git pull
     fi
     install
     update_script
