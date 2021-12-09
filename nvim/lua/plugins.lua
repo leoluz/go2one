@@ -44,9 +44,15 @@ packer.startup(function(use)
   }
 
   -- vsnips
-  use { "rafamadriz/friendly-snippets" }
-  use { "hrsh7th/vim-vsnip", after = "nvim-cmp" }
+  use {
+    "hrsh7th/vim-vsnip",
+    after = "nvim-cmp",
+    config = function()
+      vim.g.vsnip_snippet_dir = vim.env.XDG_CONFIG_HOME.."/nvim/snippets"
+    end,
+  }
   use { "hrsh7th/vim-vsnip-integ" }
+  use { "rafamadriz/friendly-snippets" }
 
   -- nvim-cmp
   use {

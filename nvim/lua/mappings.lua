@@ -20,7 +20,7 @@ map("n", "<leader>,", "10<C-W><")
 map("n", "<leader>x", ":ccl<CR>")
 
 -- format JSON
-map("n", "<leader>gj", ":%!python -m json.tool<CR>", silent)
+map("n", "<leader>gj", ":%!jq .<CR>", silent)
 
 -- misc maps
 map("i", "<C-s>", "<ESC>:w<CR>")

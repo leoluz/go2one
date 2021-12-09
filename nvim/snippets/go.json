@@ -1,0 +1,7 @@
+{
+  "test case": {
+    "prefix": "tc",
+    "body": "t.Run(\"$1\", func(t *testing.T) {\n\t// given\n\t$0\n\n\t// when\n\n\t// then\n})",
+    "description": "Snippet for Test Case"
+  }
+}
