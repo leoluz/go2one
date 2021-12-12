@@ -26,10 +26,24 @@ packer.startup(function(use)
 
   -- themes
   use {
+    "EdenEast/nightfox.nvim",
+    config = function() require("plugins/nightfox") end,
+  }
+  use {
+    disable = true,
+    "folke/tokyonight.nvim",
+    config = function()
+      vim.g.tokyonight_style = "night"
+      vim.g.tokyonight_transparent = true
+    end,
+  }
+  use {
+    disable = true,
     "navarasu/onedark.nvim",
     config = function() require("plugins/onedark") end,
   }
   use {
+    disable = true,
     "rakr/vim-one",
   }
   use {
@@ -38,6 +52,7 @@ packer.startup(function(use)
     config = function() require("plugins/onedarkpro") end,
   }
   use {
+    disable = true,
     "catppuccin/nvim",
     as = "catppuccin",
     config = function() require("plugins/catppuccin") end,
