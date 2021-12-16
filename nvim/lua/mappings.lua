@@ -1,4 +1,6 @@
-local map = require("utils").map
+local utils = require "utils"
+
+local map = utils.map
 local silent = { silent=true }
 
 -- map leader key to space.
@@ -42,6 +44,9 @@ map("n", "<C-x>", ":split term://bash<CR>", silent)
 map("n", "<leader>a", "ggVG$", silent)
 map("i", "<C-a>", "<ESC>ggvG$")
 map("v", "<silent><C-s>", ":sort<CR>", silent)
+map("n", "<leader>s", ":lua require'utils'.reload('go2one')<CR>")
 
 -- Terminal mappings
 map("t", "<C-n>", "<C-\\><C-n>")
+
+map("n", "<leader>t", ":lua require'go2one.gotest'.telescope.run_nearest()<CR>")
