@@ -57,5 +57,5 @@ catppuccin.setup(
 }
 )
 
-vim.cmd [[colorscheme catppuccin]]
-vim.cmd("highlight DashboardHeader guifg="..cp.catppuccin3)
+-- vim.cmd [[colorscheme catppuccin]]
+-- vim.cmd("highlight DashboardHeader guifg="..cp.catppuccin3)

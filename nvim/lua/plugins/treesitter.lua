@@ -2,6 +2,9 @@ require "nvim-treesitter.configs".setup {
   --ensure_installed = "maintained",
   highlight = {
     enable = true,
+    -- disable = function(lang, bufnr)
+    --   return vim.api.nvim_buf_line_count(bufnr) > 10000
+    -- end,
   },
   refactor = {
     highlight_current_scope = { enable = false },

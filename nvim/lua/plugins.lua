@@ -90,7 +90,7 @@ packer.startup(function(use)
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSInstallSync go",
-    branch = "0.5-compat",
+    -- branch = "0.5-compat",
     config = function() require("plugins/treesitter") end,
   }
   use {
