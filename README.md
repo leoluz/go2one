@@ -88,13 +88,13 @@ Seems some previously compiled Treesitter parsers are incompatible with 0.7.0 an
 ```
 treesitter/highlighter: Error executing lua: /usr/share/nvim/runtime/lua/vim/treesitter/query.lua...
 ```
-If this is the case run the following commands:
+If this is the case run the following command in the terminal:
 ```
 rm $HOME/.config/go2one/data/nvim/site/pack/packer/start/nvim-treesitter/parser/*
 ```
 Then start nvim and run:
 ```
-TSInstall all
+:TSInstall all
 ```
 
 [1]: https://microsoft.github.io/language-server-protocol/ "Language Server Protocol"
