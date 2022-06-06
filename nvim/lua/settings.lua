@@ -10,7 +10,7 @@ opt.signcolumn = "auto:9" -- auto show the gutter with max size
 opt.wrap = false
 opt.clipboard = "unnamed" -- y yy d works with system clipboard
 opt.hlsearch = false
-opt.laststatus = 2
+opt.laststatus = 3
 opt.wildignore:append("*.bak","*.pyc","*.py~","*.pdf","*.so","*.gif","*.jpg","*.flv","*.class","*.jar","*.png","*/tools/*","*/docs/*","*.swp","*/.svn/*","*/.git/*")
 opt.wildmode = "list:longest"
 opt.wildmenu = true
@@ -39,3 +39,7 @@ opt.list = true
 opt.mouse = "a"
 opt.background = "dark"
 opt.listchars:append({trail = '·', eol = '↩', tab = '› '})
+
+-- enable nvim-0.7 faster filetype detection
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
