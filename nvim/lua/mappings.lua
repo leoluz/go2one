@@ -49,4 +49,4 @@ map("n", "<leader>s", ":lua require'utils'.reload('go2one')<CR>")
 -- Terminal mappings
 map("t", "<C-n>", "<C-\\><C-n>")
 
-map("n", "<leader>t", ":lua require'go2one.gotest'.telescope.run_nearest()<CR>")
+map("n", "<leader>t", ":lua require'go2one.gotest'.test_nearest({layout_strategy = 'vertical', layout_config = {preview_cutoff = 1}})<CR>", silent)

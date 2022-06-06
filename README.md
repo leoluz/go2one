@@ -10,6 +10,7 @@ A text editor for developers of the 21st century.
 * [Installation](#installation)
     * [Native install](#native-install)
     * [Container based](#container-based)
+* [Upgrading](#upgrading)
 
 ## Goal
 
@@ -79,6 +80,22 @@ Just run the following command in the folder having the files you want to edit:
 
     docker run --rm -it -v$(PWD):/home/nvim/work leoluz/go2one:latest
 
+## Upgrading
+
+### nvim-0.7.0
+
+Seems some previously Treesitter parsers are incompatible with 0.7.0 and the following error might show up:
+```
+treesitter/highlighter: Error executing lua: /usr/share/nvim/runtime/lua/vim/treesitter/query.lua...
+```
+If this is the case run the following commands:
+```
+rm $HOME/.config/go2one/data/nvim/site/pack/packer/start/nvim-treesitter/parser/*
+```
+Then start nvim and run:
+```
+TSInstall all
+```
 
 [1]: https://microsoft.github.io/language-server-protocol/ "Language Server Protocol"
 [2]: https://tree-sitter.github.io/tree-sitter/ "Treesitter"

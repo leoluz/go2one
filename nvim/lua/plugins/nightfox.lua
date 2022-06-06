@@ -57,14 +57,16 @@ nightfox.setup({
     }
   },
   groups = {
-    TSProperty = { fg = "palette.pink" },
-    TSKeywordFunction = { fg = "palette.pink" },
-    Identifier = { fg = "palette.cyan" },
-    dashboardHeader = { fg = "palette.green"},
-    -- GitSignsDeleteLn = { fg = "${red}" },
-    -- TSPunctDelimiter = { fg = "${red}" }, -- Override a highlight group with the color red
-    -- LspCodeLens = { bg = "#000000", style = "italic" },
-  }
+    all = {
+      TSProperty = { fg = "palette.pink" },
+      TSKeywordFunction = { fg = "palette.pink" },
+      Identifier = { fg = "palette.cyan" },
+      dashboardHeader = { fg = "palette.green"},
+      -- GitSignsDeleteLn = { fg = "${red}" },
+      -- TSPunctDelimiter = { fg = "${red}" }, -- Override a highlight group with the color red
+      -- LspCodeLens = { bg = "#000000", style = "italic" },
+    }
+  },
 })
 
-vim.cmd [[colorscheme nightfox]]
+vim.cmd("colorscheme nightfox")

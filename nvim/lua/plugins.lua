@@ -181,7 +181,7 @@ packer.startup(function(use)
 
   -- marks
   use {
-    "chentau/marks.nvim",
+    "chentoast/marks.nvim",
     config = function() require("plugins/marks") end,
   }
 
