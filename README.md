@@ -84,7 +84,7 @@ Just run the following command in the folder having the files you want to edit:
 
 ### nvim-0.7.0
 
-Seems some previously Treesitter parsers are incompatible with 0.7.0 and the following error might show up:
+Seems some previously compiled Treesitter parsers are incompatible with 0.7.0 and the following error might show up:
 ```
 treesitter/highlighter: Error executing lua: /usr/share/nvim/runtime/lua/vim/treesitter/query.lua...
 ```
