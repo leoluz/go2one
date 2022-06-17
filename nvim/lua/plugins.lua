@@ -9,6 +9,7 @@ packer.startup(function(use)
   --dashboard
   use {
     "glepnir/dashboard-nvim",
+    commit = "a36b3232c98616149784f2ca2654e77caea7a522",
     config = function() require("plugins/dashboard") end,
   }
 
@@ -26,6 +27,7 @@ packer.startup(function(use)
 
   -- themes
   use {
+    disable = true,
     "EdenEast/nightfox.nvim",
     config = function() require("plugins/nightfox") end,
   }
@@ -52,7 +54,6 @@ packer.startup(function(use)
     config = function() require("plugins/onedarkpro") end,
   }
   use {
-    disable = true,
     "catppuccin/nvim",
     as = "catppuccin",
     config = function() require("plugins/catppuccin") end,
@@ -132,6 +133,7 @@ packer.startup(function(use)
   -- bufferline
   use {
     "akinsho/bufferline.nvim",
+    tag = "v2.*",
     requires = {"kyazdani42/nvim-web-devicons", opt = true},
     config = function() require("plugins/bufferline") end,
   }
