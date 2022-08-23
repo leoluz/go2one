@@ -187,4 +187,10 @@ packer.startup(function(use)
     config = function() require("plugins/marks") end,
   }
 
+  -- vim-pencil
+  use {
+    "preservim/vim-pencil",
+    config = function() require("plugins/pencil") end,
+  }
+
 end)

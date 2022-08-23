@@ -6,8 +6,6 @@ bufferline.setup{
   options = {
     numbers = "ordinal",
     close_command = "bdelete! %d",
-    --indicator_icon = '▎',
-    indicator_icon = '',
     buffer_close_icon = '',
     modified_icon = '●',
     close_icon = '',
@@ -20,12 +18,17 @@ bufferline.setup{
     show_tab_indicators = false,
     persist_buffer_sort = true,
     --separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
-    separator_style = "thin",
+    separator_style = "thick",
     enforce_regular_tabs = false,
     always_show_bufferline = false,
   }
 }
 
+
+map("n", "<C-l>", ":BufferLineCycleNext<CR>", silent)
+map("n", "<C-h>", ":BufferLineCyclePrev<CR>", silent)
+map("n", "<C-k>", ":BufferLineMoveNext<CR>", silent)
+map("n", "<C-j>", ":BufferLineMovePrev<CR>", silent)
 map("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", silent)
 map("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", silent)
 map("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", silent)
