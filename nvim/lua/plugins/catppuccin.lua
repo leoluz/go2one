@@ -1,9 +1,13 @@
 local catppuccin = require("catppuccin")
--- local cp = require("catppuccin.core.color_palette")
 
 catppuccin.setup(
 {
+  flavour = "macchiato", -- latte, frappe, macchiato, mocha
   transparent_background = true,
+  background = { -- :h background
+    light = "latte",
+    dark = "macchiato",
+  },
   term_colors = false,
   styles = {
     comments = {"italic"},
@@ -11,6 +15,11 @@ catppuccin.setup(
     keywords = {"italic"},
     strings = {},
     variables = {},
+  },
+  dim_inactive = {
+      enabled = true,
+      shade = "dark",
+      percentage = 0.15,
   },
   integrations = {
     treesitter = true,
@@ -61,7 +70,4 @@ catppuccin.setup(
 }
 )
 
-vim.g.catppuccin_flavour = "frappe" -- latte, frappe, macchiato, mocha
-vim.cmd[[colorscheme catppuccin]]
--- vim.cmd [[colorscheme catppuccin]]
--- vim.cmd("highlight DashboardHeader guifg="..cp.catppuccin3)
+vim.cmd.colorscheme "catppuccin"

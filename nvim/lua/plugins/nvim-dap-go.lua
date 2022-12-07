@@ -3,4 +3,4 @@ local map = require("utils").map
 local silent = { silent=true }
 
 dapgo.setup()
-map("n", "<leader>y", ":lua require('dap-go').debug_test()<CR>", silent)
+map("n", "<leader>y", dapgo.debug_test, silent)

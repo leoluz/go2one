@@ -141,9 +141,8 @@ packer.startup(function(use)
   -- gitsigns
   use {
     "lewis6991/gitsigns.nvim",
-    requires = { {"nvim-lua/plenary.nvim"} },
-    tag = "release", -- To use the latest release
     config = function() require("plugins/gitsigns") end,
+--    requires = { {"nvim-lua/plenary.nvim"} },
   }
 
   -- autopairs
@@ -188,9 +187,9 @@ packer.startup(function(use)
   }
 
   -- vim-pencil
-  use {
-    "preservim/vim-pencil",
-    config = function() require("plugins/pencil") end,
-  }
+  -- use {
+  --   "preservim/vim-pencil",
+  --   config = function() require("plugins/pencil") end,
+  -- }
 
 end)

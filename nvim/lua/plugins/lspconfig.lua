@@ -1,21 +1,26 @@
 local lspconfig = require('lspconfig')
-local configs = require('lspconfig.configs')
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local map = require("utils").map
+local builtin = require('telescope.builtin')
+local lspbuf = vim.lsp.buf
+
+local opt = {noremap = true, silent = true}
 
 local on_attach = function()
-  -- vim.api.nvim_set_keymap("n", "<Leader>o", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", {noremap = true, silent = true})
-  -- vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", {noremap = true, silent = true})
-  -- vim.api.nvim_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "gn", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "gp", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", {noremap = true, silent = true})
-  vim.api.nvim_set_keymap("n", "gW", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", {noremap = true, silent = true})
+  map("n", "<leader>fs", builtin.lsp_dynamic_workspace_symbols, opt)
+  map("n", "gr", builtin.lsp_references, opt)
+  map("n", "gi", builtin.lsp_implementations, opt)
+  map("n", "<leader>o", builtin.lsp_document_symbols, opt)
+  map("n", "ga", lspbuf.code_action, opt)
+  map("n", "gd", lspbuf.definition, opt)
+  map("n", "gD", lspbuf.declaration, opt)
+  map("n", "gt", vim.lsp.buf.type_definition, opt)
+
+  map("n", "gn", vim.diagnostic.goto_next, opt)
+  map("n", "gp", vim.diagnostic.goto_prev, opt)
+
+  map("n", "<Leader>rn", vim.lsp.buf.rename, opt)
+  map("n", "K", vim.lsp.buf.hover, opt)
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -31,7 +36,6 @@ vim.fn.sign_define("LspDiagnosticsSignError", {text="", texthl="LspDiagnostic
 vim.fn.sign_define("LspDiagnosticsSignWarning", {text="", texthl="LspDiagnosticsSignWarning", linehl="", numhl=""})
 vim.fn.sign_define("LspDiagnosticsSignInformation", {text="", texthl="LspDiagnosticsSignInformation", linehl="", numhl=""})
 vim.fn.sign_define("LspDiagnosticsSignHint", {text="ﯦ", texthl="LspDiagnosticsSignHint", linehl="", numhl=""})
-
 vim.fn.sign_define("DiagnosticSignError", {text="", texthl="DiagnosticSignError", linehl="", numhl=""})
 vim.fn.sign_define("DiagnosticSignWarn", {text="", texthl="DiagnosticSignWarn", linehl="", numhl=""})
 vim.fn.sign_define("DiagnosticSignInfo", {text="", texthl="DiagnosticSignInfo", linehl="", numhl=""})
@@ -55,23 +59,6 @@ lspconfig.gopls.setup{
     },
   },
 }
-
--- golangci-lint-langserver setup
--- if not configs.golangcilsp then
---   configs.golangcilsp = {
---     default_config = {
---       cmd = {"golangci-lint-langserver", "-debug", "true"},
---       root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
---       init_options = {
---         command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json" };
---       }
---     };
---   }
--- end
-
--- lspconfig.golangcilsp.setup {
---   filetypes = {'go'}
--- }
 
 ----------------
 -- Lua Configs
