@@ -7,6 +7,7 @@ local silent = { silent=true }
 
 telescope.setup {
   defaults = {
+    layout_strategy = 'flex',
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,

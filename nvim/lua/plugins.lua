@@ -1,7 +1,5 @@
 local packer = require("packer")
--- packer.init{
---   max_jobs = 3,
--- }
+
 packer.startup(function(use)
   -- Packer can manage itself
   use "wbthomason/packer.nvim"
@@ -59,33 +57,56 @@ packer.startup(function(use)
     config = function() require("plugins/catppuccin") end,
   }
 
-  -- vsnips
+
   use {
-    "hrsh7th/vim-vsnip",
-    after = "nvim-cmp",
-    config = function()
-      vim.g.vsnip_snippet_dir = vim.env.XDG_CONFIG_HOME.."/nvim/snippets"
-    end,
+    'VonHeikemen/lsp-zero.nvim',
+    requires = {
+      -- LSP Support
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+
+      -- Autocompletion
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
+
+      -- Snippets
+      { 'L3MON4D3/LuaSnip' },
+      { 'rafamadriz/friendly-snippets' },
+    },
+    config = function() require("plugins/lsp-zero") end,
   }
-  use { "hrsh7th/vim-vsnip-integ" }
-  use { "rafamadriz/friendly-snippets" }
+
+  -- vsnips
+  -- use {
+  --   "hrsh7th/vim-vsnip",
+  --   after = "nvim-cmp",
+  --   config = function()
+  --     vim.g.vsnip_snippet_dir = vim.env.XDG_CONFIG_HOME.."/nvim/snippets"
+  --   end,
+  -- }
+  -- use { "hrsh7th/vim-vsnip-integ" }
+  -- use { "rafamadriz/friendly-snippets" }
 
   -- nvim-cmp
-  use {
-    "hrsh7th/nvim-cmp",
-    --after = "nvim-lspconfig",
-    config = function() require("plugins/cmp") end,
-  }
-  use { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }
-  use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
-  use { "hrsh7th/cmp-vsnip", after = "nvim-cmp" }
+  -- use {
+  --   "hrsh7th/nvim-cmp",
+  --   config = function() require("plugins/cmp") end,
+  -- }
+  -- use { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }
+  -- use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
+  -- use { "hrsh7th/cmp-vsnip", after = "nvim-cmp" }
 
   -- lsp-config
-  use {
-    "neovim/nvim-lspconfig",
-    after = {"cmp-nvim-lsp"},
-    config = function() require("plugins/lspconfig") end,
-  }
+  -- use {
+  --   "neovim/nvim-lspconfig",
+  --   after = {"cmp-nvim-lsp"},
+  --   config = function() require("plugins/lspconfig") end,
+  -- }
 
   -- treesitter
   use {
@@ -107,13 +128,13 @@ packer.startup(function(use)
   use {
     "nvim-telescope/telescope.nvim",
     requires = {
-      {"nvim-lua/plenary.nvim"},
-      {"gbrlsnchs/telescope-lsp-handlers.nvim"},
-      {"nvim-telescope/telescope-fzf-native.nvim",
+      { "nvim-lua/plenary.nvim" },
+      { "gbrlsnchs/telescope-lsp-handlers.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim",
         run = "make",
       },
-      {"nvim-telescope/telescope-github.nvim"},
-      {"cljoly/telescope-repo.nvim"},
+      { "nvim-telescope/telescope-github.nvim" },
+      { "cljoly/telescope-repo.nvim" },
     },
     config = function() require("plugins/telescope") end,
   }
@@ -126,7 +147,7 @@ packer.startup(function(use)
   -- lualine
   use {
     "nvim-lualine/lualine.nvim",
-    requires = {"kyazdani42/nvim-web-devicons", opt = true},
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
     config = function() require("plugins/lualine") end,
   }
 
@@ -134,7 +155,7 @@ packer.startup(function(use)
   use {
     "akinsho/bufferline.nvim",
     tag = "v2.*",
-    requires = {"kyazdani42/nvim-web-devicons", opt = true},
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
     config = function() require("plugins/bufferline") end,
   }
 
