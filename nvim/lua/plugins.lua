@@ -57,7 +57,6 @@ packer.startup(function(use)
     config = function() require("plugins/catppuccin") end,
   }
 
-
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {

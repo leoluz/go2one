@@ -1,0 +1,13 @@
+{
+    "name": "custom-snippets",
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                    "go"
+                ],
+                "path": "./snippets/go.json"
+            }
+        ]
+    }
+}
