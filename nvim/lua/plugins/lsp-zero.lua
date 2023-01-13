@@ -123,6 +123,17 @@ lsp.set_preferences({
   }
 })
 
+
+--------------
+-- yamlls setup
+lsp.configure('yamlls', {
+  settings = {
+    yaml = {
+      schemas = { kubernetes = "globPattern" },
+    },
+  },
+})
+
 --------------
 -- gopls setup
 lsp.configure('gopls', {

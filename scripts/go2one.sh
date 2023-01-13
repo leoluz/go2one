@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+NVIM_HOME=$HOME/.config/nvim
 NVIM_MIN_VERSION="v0.5.1"
 GO2ONE_HOME=${GO2ONE_HOME:-$HOME/.config/go2one}
 GO2ONE_BIN="/usr/local/bin/go2one"
@@ -105,6 +106,12 @@ verify_install() {
     fi
 }
 
+link() {
+    if [ ! -L $NVIM_HOME ]; then
+        ln -s $GO2ONE_HOME/go2one.git/nvim $NVIM_HOME
+    fi
+}
+
 usage() {
    echo "Utility to run and manage go2one installation"
    echo
@@ -122,6 +129,7 @@ usage() {
    echo "  update       update go2one installation."
    echo "  reinstall    reinstall go2one. Data files will be deleted"
    echo "  uninstall    remove go2one installation"
+   echo "  link         create nvim symlink"
    echo
 }
 
@@ -158,6 +166,10 @@ case $parm1 in
     uninstall)
         echo "Uninstalling go2one..."
         uninstall
+        ;;
+    link)
+        echo "Creating nvim symlink"
+        link
         ;;
     *)
         verify_install
