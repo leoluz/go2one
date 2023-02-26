@@ -1,7 +1,6 @@
 local api = vim.api
 local bo = vim.bo
 local utils = require("utils")
-local cmp = require("cmp")
 
 -- will format file before saving based on attached lsp capabilities
 api.nvim_create_augroup("lsp", { clear = true })
@@ -29,25 +28,6 @@ api.nvim_create_autocmd({"BufLeave", "BufWinLeave"}, {
   group = "yaml",
   pattern = {"*.yaml", "*.yml"},
   callback = function() vim.wo.cursorcolumn = false end,
-})
-
--- lua configurations
-local luaOpts = function()
-  cmp.setup.buffer {
-    sources = {
-      { name = 'buffer' },
-      { name = 'nvim_lua' },
-      { name = 'ultisnips' },
-      { name = 'nvim_lsp' },
-    }
-  }
-  return bufferOpts()
-end
-api.nvim_create_augroup("lua", { clear = true })
-api.nvim_create_autocmd("FileType", {
-  group = "lua",
-  pattern = "lua",
-  callback = luaOpts,
 })
 
 -- golang configurations

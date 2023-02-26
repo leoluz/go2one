@@ -102,8 +102,21 @@ cmp.setup({
   },
 })
 
--- Setup lspconfig.
---local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
---require('lspconfig')['gopls'].setup {
---capabilities = capabilities
---}
+-- lua configurations
+local luaOpts = function()
+  cmp.setup.buffer {
+    sources = {
+      { name = 'buffer' },
+      { name = 'nvim_lua' },
+      { name = 'ultisnips' },
+      { name = 'nvim_lsp' },
+    }
+  }
+  return bufferOpts()
+end
+api.nvim_create_augroup("lua", { clear = true })
+api.nvim_create_autocmd("FileType", {
+  group = "lua",
+  pattern = "lua",
+  callback = luaOpts,
+})

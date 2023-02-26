@@ -3,34 +3,34 @@ local actions = require "telescope.actions"
 local map = require("utils").map
 local builtin = require('telescope.builtin')
 
-local silent = { silent=true }
+local silent = { silent = true }
 
 telescope.setup {
-  defaults = {
-    layout_strategy = 'flex',
-    mappings = {
-      i = {
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-        ["<esc>"] = require('telescope.actions').close,
-      },
+    defaults = {
+        layout_strategy = 'flex',
+        mappings = {
+            i = {
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<esc>"] = require('telescope.actions').close,
+            },
+        },
     },
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
+    extensions = {
+        fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+        },
+        lsp_handlers = {
+            code_action = {
+                telescope = require('telescope.themes').get_dropdown({}),
+            },
+        },
     },
-    lsp_handlers = {
-      code_action = {
-        telescope = require('telescope.themes').get_dropdown({}),
-      },
-    },
-  },
 }
-telescope.load_extension("fzf")
+-- telescope.load_extension("fzf")
 telescope.load_extension('lsp_handlers')
 telescope.load_extension('gh')
 telescope.load_extension('repo')

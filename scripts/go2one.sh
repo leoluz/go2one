@@ -6,7 +6,6 @@ NVIM_MIN_VERSION="v0.5.1"
 GO2ONE_HOME=${GO2ONE_HOME:-$HOME/.config/go2one}
 GO2ONE_BIN="/usr/local/bin/go2one"
 DATA_HOME="$GO2ONE_HOME/data"
-PACKER_HOME="$DATA_HOME/nvim/site/pack/packer/start/packer.nvim"
 NVIM_CMD="XDG_CONFIG_HOME=$GO2ONE_HOME/go2one.git XDG_DATA_HOME=$DATA_HOME nvim"
 
 abort() {
@@ -36,6 +35,22 @@ verify_env() {
         abort "Command 'nvim' not found: Neovim must be installed"
     fi
 
+    if ! command -v go >/dev/null; then
+        abort "Command 'go' not found"
+    fi
+
+    if ! command -v make >/dev/null; then
+        abort "Command 'make' not found"
+    fi
+
+    if ! command -v gcc >/dev/null; then
+        abort "Command 'gcc' not found"
+    fi
+
+    if ! command -v npm >/dev/null; then
+	abort "Command 'npm' not found"
+    fi
+
     nvim_version=$(nvim -version | head -n 1 | awk '{print $2}')
     if $( ! gte $nvim_version $NVIM_MIN_VERSION); then
         abort "Unsupported Neovim version ($nvim_version). Must be equal or greater than "$NVIM_MIN_VERSION
@@ -43,7 +58,26 @@ verify_env() {
 }
 
 install() {
+    mode=${2:-isolated}
+
+    read -p "This will install go2one in mode '$mode'. Proceed? [Yy]" -n 1 -r
+    echo ""
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "ok.. bye!"
+        return 0
+    fi
+
     verify_env
+    if [ "$mode" == "native" ]; then
+        native_install
+    else 
+        isolated_install
+    fi
+    return 0
+}
+
+isolated_install() {
+
     if [ ! -d "$GO2ONE_HOME" ]; then
         mkdir -p $GO2ONE_HOME
     fi
@@ -60,6 +94,47 @@ install() {
     cmd="$NVIM_CMD --headless -c 'autocmd User PackerComplete quitall' +PackerSync"
     eval $cmd
     echo
+}
+
+native_install() {
+    nvim_local_dir="$HOME/.local/share/nvim"
+    if [[ -d "$NVIM_HOME" || -L "$NVIM_HOME" ]]; then
+        echo "Existing nvim config found."
+        echo "The file $NVIM_HOME will be deleted."
+        echo "The folder $nvim_local_dir will be deleted."
+        read -p "Proceed? [Yy]" -n 1 -r
+        echo ""
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "ok.. bye!"
+            return 0
+        fi
+        rm -rf $NVIM_HOME
+    fi
+    if [[ -d "$nvim_local_dir" ]]; then
+        rm -rf $nvim_local_dir
+    fi
+
+    git clone --quiet --depth 1 https://github.com/wbthomason/packer.nvim\
+     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+    script_dir=$(current_script_dir)
+    repo_root_dir=$(dirname $script_dir)
+    ln -s $repo_root_dir/nvim $HOME/.config/nvim
+
+    # run nvim in headless mode. Redirects output to /dev/null to avoid
+    # packer chicken-n-egg errors in the first run
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' &>/dev/null
+    echo "Installed. Have fun!"
+}
+
+current_script_dir() {
+    SOURCE=${BASH_SOURCE[0]}
+    while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+      DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+      SOURCE=$(readlink "$SOURCE")
+      [[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    echo $( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 }
 
 reinstall() {
@@ -153,7 +228,7 @@ parm1=${1:-}
 case $parm1 in
     install)
         echo "Installing go2one..."
-        install
+        install $@
         ;;
     update)
         echo "Updating go2one..."
