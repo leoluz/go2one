@@ -1,7 +1,8 @@
 local utils = require "utils"
 
 local map = utils.map
-local silent = { silent=true }
+local silent = { silent = true }
+local expr = { expr = true }
 
 -- map leader key to space.
 vim.g.mapleader = " "
@@ -13,8 +14,6 @@ map("n", "<leader>h", "<C-W>h")
 map("n", "<leader>l", "<C-W>l")
 map("n", "<leader>m", "<C-W>_")
 map("n", "<leader>=", "<C-W>=")
-map("n", "<leader>-", "5<C-W>-")
-map("n", "<leader>+", "5<C-W>+")
 map("n", "<leader>.", "10<C-W>>")
 map("n", "<leader>,", "10<C-W><")
 
@@ -30,13 +29,13 @@ map("i", "<C-@>", "<C-x><C-o>")
 map("i", "<C-l>", "<ESC>A")
 map("n", "<F4>", ":setlocal spell! spelllang=en_us<CR>")
 map("n", "Y", "y$")
-map("n", "j", "gj")
-map("n", "k", "gk")
+map("n", "j", "(v:count == 0 ? 'gj' : 'j')", expr)
+map("n", "k", "(v:count == 0 ? 'gk' : 'k')", expr)
 map("n", "gb", "`.")
 map("n", "<C-s>", ":w<CR>")
 map("n", "<BS>", ":bdelete<CR>")
 map("n", "_", ":bdelete!<CR>")
-map("n", "<C-_>", ":q!<CR>")
+map("n", "<leader>-", ":q!<CR>")
 map("n", "<leader>v", ":e $MYVIMRC<CR>", silent)
 map("n", "<C-x>", ":split term://bash<CR>", silent)
 map("n", "<leader>a", "ggVG$", silent)
@@ -47,4 +46,6 @@ map("n", "<leader>s", ":lua require'utils'.reload('go2one')<CR>")
 -- Terminal mappings
 map("t", "<C-n>", "<C-\\><C-n>")
 
-map("n", "<leader>t", ":lua require'go2one.gotest'.test_nearest({layout_strategy = 'vertical', layout_config = {preview_cutoff = 1}})<CR>", silent)
+map("n", "<leader>t",
+  ":lua require'go2one.gotest'.test_nearest({layout_strategy = 'vertical', layout_config = {preview_cutoff = 1}})<CR>",
+  silent)

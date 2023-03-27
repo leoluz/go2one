@@ -1,9 +1,9 @@
 require("dap")
 local map = require("utils").map
-local silent = { silent=true }
+local silent = { silent = true }
 
-vim.fn.sign_define('DapStopped', {text='▸', texthl='', linehl='debugPC', numhl=''})
-vim.fn.sign_define('DapBreakpoint', {text='🔵', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', { text = '▸', texthl = '', linehl = 'debugPC', numhl = '' })
+vim.fn.sign_define('DapBreakpoint', { text = '🔵', texthl = '', linehl = '', numhl = '' })
 
 map("n", "<F7>", ":lua require'dap'.toggle_breakpoint()<CR>", silent)
 map("n", "<F8>", ":lua require'dap'.continue()<CR>", silent)

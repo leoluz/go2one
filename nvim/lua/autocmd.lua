@@ -19,14 +19,14 @@ local bufferOpts = function()
   vim.wo.cursorcolumn = true
 end
 api.nvim_create_augroup("yaml", { clear = true })
-api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   group = "yaml",
-  pattern = {"*.yaml", "*.yml"},
+  pattern = { "*.yaml", "*.yml" },
   callback = bufferOpts,
 })
-api.nvim_create_autocmd({"BufLeave", "BufWinLeave"}, {
+api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
   group = "yaml",
-  pattern = {"*.yaml", "*.yml"},
+  pattern = { "*.yaml", "*.yml" },
   callback = function() vim.wo.cursorcolumn = false end,
 })
 
@@ -42,6 +42,28 @@ api.nvim_create_autocmd("FileType", {
   group = "golang",
   pattern = "go",
   callback = goOpts,
+})
+
+
+-- markdown configurations
+local markdownIn = function()
+  bo.textwidth = 70
+  vim.wo.wrap = true
+end
+local markdownOut = function()
+  vim.wo.wrap = false
+end
+
+api.nvim_create_augroup("markdown", { clear = true })
+api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  group = "markdown",
+  pattern = { "*.md", "*.markdown" },
+  callback = markdownIn,
+})
+api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
+  group = "markdown",
+  pattern = { "*.md", "*.markdown" },
+  callback = markdownOut,
 })
 
 -- -- term configurations
