@@ -30,6 +30,20 @@ api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
   callback = function() vim.wo.cursorcolumn = false end,
 })
 
+-- lua configurations
+api.nvim_create_augroup("lua", { clear = true })
+api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  group = "lua",
+  pattern = { "*.lua" },
+  callback = bufferOpts,
+})
+api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
+  group = "lua",
+  pattern = { "*.lua" },
+  callback = function() vim.wo.cursorcolumn = false end,
+})
+
+
 -- golang configurations
 local goOpts = function()
   bo.tabstop = 4

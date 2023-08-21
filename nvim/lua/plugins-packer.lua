@@ -80,33 +80,6 @@ packer.startup(function(use)
     config = function() require("plugins/lsp-zero") end,
   }
 
-  -- vsnips
-  -- use {
-  --   "hrsh7th/vim-vsnip",
-  --   after = "nvim-cmp",
-  --   config = function()
-  --     vim.g.vsnip_snippet_dir = vim.env.XDG_CONFIG_HOME.."/nvim/snippets"
-  --   end,
-  -- }
-  -- use { "hrsh7th/vim-vsnip-integ" }
-  -- use { "rafamadriz/friendly-snippets" }
-
-  -- nvim-cmp
-  -- use {
-  --   "hrsh7th/nvim-cmp",
-  --   config = function() require("plugins/cmp") end,
-  -- }
-  -- use { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }
-  -- use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
-  -- use { "hrsh7th/cmp-vsnip", after = "nvim-cmp" }
-
-  -- lsp-config
-  -- use {
-  --   "neovim/nvim-lspconfig",
-  --   after = {"cmp-nvim-lsp"},
-  --   config = function() require("plugins/lspconfig") end,
-  -- }
-
   -- treesitter
   use {
     "nvim-treesitter/nvim-treesitter",

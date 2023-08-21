@@ -1,4 +1,4 @@
-require("plugins")
+require("plugins-lazy")
 require("settings")
 require("mappings")
 require("autocmd")

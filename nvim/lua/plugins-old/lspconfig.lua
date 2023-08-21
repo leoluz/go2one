@@ -26,19 +26,23 @@ end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
-  virtual_text = false,
-  signs = true,
-  update_in_insert = false,
-}
+    underline = true,
+    virtual_text = false,
+    signs = true,
+    update_in_insert = false,
+  }
 )
 
 vim.fn.sign_define("LspDiagnosticsSignError", { text = "", texthl = "LspDiagnosticsSignError", linehl = "", numhl = "" })
-vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", texthl = "LspDiagnosticsSignWarning", linehl = "",
-  numhl = "" })
+vim.fn.sign_define("LspDiagnosticsSignWarning", {
+  text = "",
+  texthl = "LspDiagnosticsSignWarning",
+  linehl = "",
+  numhl = ""
+})
 vim.fn.sign_define("LspDiagnosticsSignInformation",
   { text = "", texthl = "LspDiagnosticsSignInformation", linehl = "", numhl = "" })
-vim.fn.sign_define("LspDiagnosticsSignHint", { text = "ﯦ", texthl = "LspDiagnosticsSignHint", linehl = "", numhl = "" })
+vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", texthl = "LspDiagnosticsSignHint", linehl = "", numhl = "" })
 vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" })
 vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })

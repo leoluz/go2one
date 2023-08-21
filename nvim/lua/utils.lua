@@ -2,7 +2,7 @@ local M = {}
 
 -- map is a nvim_set_keymap wrapper function that applies pre-defined options
 function M.map(mode, lhs, rhs, opts)
-  local options = {noremap = true}
+  local options = { noremap = true }
   if opts then options = vim.tbl_extend("force", options, opts) end
   vim.keymap.set(mode, lhs, rhs, options)
 end
@@ -12,7 +12,7 @@ end
 function M.auto_format_lsp()
   local id, client = next(vim.lsp.buf_get_clients())
   if id ~= nil and client.server_capabilities.documentFormattingProvider then
-    vim.lsp.buf.formatting_sync(nil, 100)
+    vim.lsp.buf.format()
   end
 end
 
@@ -26,7 +26,7 @@ function M.reload(module_name)
       package.loaded[p] = nil
     end
   end
-  print("module "..module_name.." reloaded!")
+  print("module " .. module_name .. " reloaded!")
 end
 
 return M
