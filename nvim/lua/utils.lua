@@ -12,7 +12,7 @@ end
 function M.auto_format_lsp()
   local id, client = next(vim.lsp.buf_get_clients())
   if id ~= nil and client.server_capabilities.documentFormattingProvider then
-    vim.lsp.buf.formatting_sync(nil, 100)
+    vim.lsp.buf.format(nil, 100)
   end
 end
 
