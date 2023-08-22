@@ -1,49 +1,55 @@
-local g = vim.g
-local map = require("utils").map
-local silent = { silent=true }
-
-g.dashboard_default_executive = "telescope"
-map("n", "<leader>fr", ":DashboardFindHistory<CR>", silent)
-map("n", "<leader>fl", ":SessionLoad<CR>", silent)
-map("n", "<leader>fn", ":DashboardNewFile<CR>", silent)
-map("n", "<leader>fm", ":DashboardJumpMarks<CR>", silent)
-
-g.dashboard_custom_header = {
-"  ██████╗  ██████╗ ██████╗  ██████╗ ███╗   ██╗███████╗",
-" ██╔════╝ ██╔═══██╗╚════██╗██╔═══██╗████╗  ██║██╔════╝",
-" ██║  ███╗██║   ██║ █████╔╝██║   ██║██╔██╗ ██║█████╗  ",
-" ██║   ██║██║   ██║██╔═══╝ ██║   ██║██║╚██╗██║██╔══╝  ",
-" ╚██████╔╝╚██████╔╝███████╗╚██████╔╝██║ ╚████║███████╗",
-"  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝",
-}
-
-g.dashboard_custom_section = {
-  last_session = {
-    description = {" Load saved session                    SPC f l"},
-    command = "SessionLoad",
+return {
+  "glepnir/dashboard-nvim",
+  event = 'VimEnter',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    'cljoly/telescope-repo.nvim',
   },
-  find_history = {
-    description = {" Recently opened files                 SPC f r"},
-    command = "DashboardFindHistory",
-  },
-  find_file = {
-    description = {" Find file                             SPC f f"},
-    command = "DashboardFindFile",
-  },
-  new_file = {
-    description = {" New file                              SPC f n"},
-    command = "DashboardNewFile",
-  },
-  find_word = {
-    description = {" Find word (grep)                      SPC f g"},
-    command = "DashboardFindWord",
-  },
-  find_bookmarks = {
-    description = {" Find marks                            SPC f m"},
-    command = "DashboardJumpMarks",
-  },
-  file_browser = {
-    description = {" File browser                          SPC f b"},
-    command = "lua require('telescope.builtin').file_browser()",
-  },
+  config = function()
+    require('dashboard').setup {
+      theme = 'hyper',
+      config = {
+        header = {
+          "  ██████╗  ██████╗ ██████╗  ██████╗ ███╗   ██╗███████╗",
+          " ██╔════╝ ██╔═══██╗╚════██╗██╔═══██╗████╗  ██║██╔════╝",
+          " ██║  ███╗██║   ██║ █████╔╝██║   ██║██╔██╗ ██║█████╗  ",
+          " ██║   ██║██║   ██║██╔═══╝ ██║   ██║██║╚██╗██║██╔══╝  ",
+          " ╚██████╔╝╚██████╔╝███████╗╚██████╔╝██║ ╚████║███████╗",
+          "  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝",
+        },
+        week_header = {
+          enable = false,
+        },
+        disable_move = true,
+        shortcut = {
+          {
+            desc = '󰊳 Update',
+            group = '@property',
+            action = 'Lazy update',
+            key = 'u'
+          },
+          {
+            icon = ' ',
+            icon_hl = '@variable',
+            desc = 'Files',
+            group = 'Label',
+            action = 'Telescope find_files',
+            key = 'f',
+          },
+          {
+            desc = ' Apps',
+            group = 'DiagnosticHint',
+            action = 'Telescope app',
+            key = 'a',
+          },
+          {
+            desc = ' Repos',
+            group = 'Number',
+            action = function() require('telescope').extensions.repo.list() end,
+            key = 'r',
+          },
+        },
+      },
+    }
+  end,
 }
