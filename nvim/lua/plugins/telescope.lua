@@ -81,11 +81,15 @@ return {
       map("n", "<leader>ghc", telescope.extensions.advanced_git_search.diff_commit_file, silent)
     end,
   },
-  { 'nvim-lua/plenary.nvim' },
-  { "gbrlsnchs/telescope-lsp-handlers.nvim" },
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-  { "nvim-telescope/telescope-github.nvim" },
-  { "cljoly/telescope-repo.nvim" },
+  { 'nvim-lua/plenary.nvim',                 dependencies = { "nvim-telescope/telescope.nvim" } },
+  { "gbrlsnchs/telescope-lsp-handlers.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+  { "nvim-telescope/telescope-github.nvim",  dependencies = { "nvim-telescope/telescope.nvim" } },
+  { "cljoly/telescope-repo.nvim",            dependencies = { "nvim-telescope/telescope.nvim" } },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'make',
+    dependencies = { "nvim-telescope/telescope.nvim" },
+  },
   {
     "aaronhallaert/advanced-git-search.nvim",
     dependencies = {
