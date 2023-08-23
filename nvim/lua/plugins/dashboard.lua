@@ -20,7 +20,7 @@ return {
         week_header = {
           enable = false,
         },
-        disable_move = true,
+        disable_move = false,
         shortcut = {
           {
             desc = '󰊳 Update',

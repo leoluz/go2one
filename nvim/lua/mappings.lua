@@ -47,5 +47,5 @@ map("n", "<leader>s", ":lua require'utils'.reload('go2one')<CR>")
 map("t", "<C-n>", "<C-\\><C-n>")
 
 map("n", "<leader>t",
-    ":lua require'go2one.gotest'.test_nearest({layout_strategy = 'vertical', layout_config = {preview_cutoff = 1}})<CR>"
-    , silent)
+  ":lua require'gotest'.test_nearest({layout_strategy = 'vertical', layout_config = {preview_cutoff = 1}})<CR>"
+  , silent)
