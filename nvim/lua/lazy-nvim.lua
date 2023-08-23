@@ -13,4 +13,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+local opts = {
+  dev = {
+    path = "~/git",
+    fallback = true,
+  },
+}
+require("lazy").setup("plugins", opts)

@@ -10,7 +10,7 @@ return {
       ---@type table
       toggler = {
         ---Line-comment toggle keymap
-        line = 'g/',
+        line = 'gcc',
         ---Block-comment toggle keymap
         block = 'gbc',
       },
@@ -24,7 +24,7 @@ return {
         block = 'gb',
       },
     })
-    -- map("n", "<leader>/", ":lua require('Comment.api').call('toggle_linewise_op')<CR>", silent)
-    -- map("v", "<leader>/", ":lua require('Comment.api').call('toggle_blockwise_op')<CR>", silent)
+    map("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)", silent)
+    map("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", silent)
   end
 }
