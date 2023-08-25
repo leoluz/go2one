@@ -1,5 +1,8 @@
 return {
   {
+    { "folke/neodev.nvim", opts = {} }
+  },
+  {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
     dependencies = {
@@ -14,16 +17,20 @@ return {
       { 'hrsh7th/cmp-nvim-lua' },
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
+      { 'folke/neodev.nvim' },
     },
     config = function()
-      local lsp = require('lsp-zero')
+      -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+      require("neodev").setup({})
+
+      local lspz = require('lsp-zero')
       local map = require("utils").map
       local builtin = require('telescope.builtin')
       local cmp = require('cmp')
       local luasnip = require("luasnip")
       local lspbuf = vim.lsp.buf
-      lsp.preset('recommended')
-      lsp.ensure_installed({
+      lspz.preset('recommended')
+      lspz.ensure_installed({
         'gopls',
         'lua_ls',
         'bashls',
@@ -58,7 +65,7 @@ return {
         TypeParameter = "",
       }
 
-      lsp.on_attach(function(client, bufnr)
+      lspz.on_attach(function(client, bufnr)
         local opt = { buffer = bufnr, remap = false }
         map("n", "<leader>fs", builtin.lsp_dynamic_workspace_symbols, opt)
         map("n", "gr", builtin.lsp_references, opt)
@@ -83,7 +90,7 @@ return {
       end
 
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
-      local cmp_mappings = lsp.defaults.cmp_mappings({
+      local cmp_mappings = lspz.defaults.cmp_mappings({
         ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
         ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -110,7 +117,7 @@ return {
         end, { "i", "s" }),
       })
 
-      lsp.setup_nvim_cmp {
+      lspz.setup_nvim_cmp {
         mapping = cmp_mappings,
         completion = {
           keyword_length = 1,
@@ -127,13 +134,13 @@ return {
         virtual_text = false,
       })
 
-      lsp.set_sign_icons({
+      lspz.set_sign_icons({
         error = '',
         warn = '',
         hint = '',
         info = ''
       })
-      lsp.set_preferences({
+      lspz.set_preferences({
         suggest_lsp_servers = true,
         setup_servers_on_start = true,
         set_lsp_keymaps = false,
@@ -145,7 +152,7 @@ return {
 
       --------------
       -- yamlls setup
-      lsp.configure('yamlls', {
+      lspz.configure('yamlls', {
         settings = {
           yaml = {
             schemas = { kubernetes = "globPattern" },
@@ -155,7 +162,7 @@ return {
 
       --------------
       -- gopls setup
-      lsp.configure('gopls', {
+      lspz.configure('gopls', {
         settings = {
           gopls = {
             usePlaceholders = true, --enables placeholders for function parameters or struct fields in completion responses
@@ -164,11 +171,11 @@ return {
       })
 
       ----------------
-      -- sumneko setup
+      -- lua_ls setup
       local runtime_path = vim.split(package.path, ';')
       table.insert(runtime_path, "lua/?.lua")
       table.insert(runtime_path, "lua/?/init.lua")
-      lsp.configure('lua_ls', {
+      lspz.configure('lua_ls', {
         settings = {
           Lua = {
             runtime = {
@@ -185,7 +192,7 @@ return {
         }
       })
 
-      lsp.setup()
+      lspz.setup()
     end,
   },
 
