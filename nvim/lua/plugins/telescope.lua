@@ -57,15 +57,18 @@ return {
       telescope.load_extension('gh')
       telescope.load_extension('repo')
       telescope.load_extension("advanced_git_search")
+      telescope.load_extension('projects')
 
       local function git_branches()
         builtin.git_branches({ show_remote_tracking_branches = false })
       end
 
       map("n", "<leader>ff", builtin.find_files, silent)
+      map("n", "<leader>fp", telescope.extensions.projects.projects, silent)
       map("n", "<leader>fh", builtin.help_tags, silent)
       map("n", "<leader>fg", builtin.live_grep, silent)
       map("n", "<leader>fk", builtin.keymaps, silent)
+      map("n", "<leader>fd", builtin.diagnostics, silent)
       map("n", "<leader>f;", telescope.extensions.repo.list, silent)
       map("n", "<leader>b", builtin.buffers, silent)
       -- shows all diff for current buffer

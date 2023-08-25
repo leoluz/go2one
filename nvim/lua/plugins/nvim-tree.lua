@@ -1,5 +1,11 @@
 return {
   {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {}
+    end
+  },
+  {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -12,9 +18,10 @@ return {
       local tree = require("nvim-tree")
       tree.setup {
         sync_root_with_cwd = true,
+        respect_buf_cwd = true,
         update_focused_file = {
           enable      = true,
-          update_root = false,
+          update_root = true,
         },
         renderer = {
           icons = {
