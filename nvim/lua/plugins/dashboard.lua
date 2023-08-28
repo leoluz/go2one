@@ -5,6 +5,7 @@ return {
     'nvim-tree/nvim-web-devicons',
     'cljoly/telescope-repo.nvim',
   },
+  enabled = false,
   config = function()
     require('dashboard').setup {
       theme = 'hyper',
