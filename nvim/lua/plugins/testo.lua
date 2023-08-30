@@ -1,7 +1,7 @@
 return {
-  "leoluz/gotest.nvim",
+  "leoluz/testo.nvim",
   dev = true,
   config = function()
-    require('gotest').setup()
+    require('testo').setup()
   end,
 }
