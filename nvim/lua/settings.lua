@@ -1,6 +1,6 @@
 local opt = vim.opt
 
-opt.hidden = true -- don't autosave buffers
+opt.hidden = true    -- don't autosave buffers
 opt.updatetime = 100 -- highlight sameids faster
 opt.showmatch = true -- show matching brackets
 opt.number = true
@@ -11,8 +11,9 @@ opt.wrap = false
 opt.clipboard = "unnamed" -- y yy d works with system clipboard
 opt.hlsearch = false
 opt.laststatus = 3
-opt.wildignore:append("*.bak", "*.pyc", "*.py~", "*.pdf", "*.so", "*.gif", "*.jpg", "*.flv", "*.class", "*.jar", "*.png"
-  , "*/tools/*", "*/docs/*", "*.swp", "*/.svn/*", "*/.git/*")
+opt.wildignore:append { "*.bak", "*.pyc", "*.py~", "*.pdf", "*.so", "*.gif", "*.jpg", "*.flv", "*.class", "*.jar",
+  "*.png"
+  , "*/tools/*", "*/docs/*", "*.swp", "*/.svn/*", "*/.git/*" }
 opt.wildmode    = "list:longest"
 opt.wildmenu    = true
 opt.textwidth   = 0
@@ -33,7 +34,8 @@ opt.linebreak   = true
 opt.splitbelow  = true
 opt.splitright  = true
 opt.smartcase   = true -- do smart case matching
-opt.foldmethod  = "indent"
+opt.foldmethod  = "expr"
+opt.foldexpr    = "nvim_treesitter#foldexpr()"
 opt.foldlevel   = 999
 opt.autoread    = true
 opt.list        = true

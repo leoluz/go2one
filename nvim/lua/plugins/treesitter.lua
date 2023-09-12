@@ -5,7 +5,8 @@ return {
     config = function()
       local configs = require("nvim-treesitter.configs")
       configs.setup {
-        ensure_installed = { "lua", "vim", "vimdoc", "query", "javascript", "html", "go", "bash" },
+        additional_vim_regex_highlighting = false,
+        ensure_installed = { "lua", "vim", "vimdoc", "query", "javascript", "html", "go", "bash", "json", "yaml" },
         sync_install = false,
         highlight = { enable = true },
         indent = { enable = true },
@@ -155,6 +156,9 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-refactor",
+    -- generates a terrible input lag on large files
+    -- I had to disable it for now
+    enabled = false,
     dependencies = {
       "nvim-treesitter",
     },
