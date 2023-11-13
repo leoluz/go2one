@@ -16,11 +16,9 @@ return {
       map("n", "<F11>", ":lua require'dap'.step_out()<CR>", silent)
       map("n", "<leader>i", ":lua require'dapui'.eval()<CR>", silent)
       map("n", "<leader>du", ":lua require'dapui'.toggle()<CR>", silent)
-      map("n", "<leader>dc", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+      map("n", "<leader>db", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
       map("n", "<leader>di", ":lua require'dap'.step_into()<CR>")
-      map("n", "<leader>do", ":lua require'dap'.step_over()<CR>")
       map("n", "<leader>dd", ":lua require'dap'.continue()<CR>")
-      map("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>")
 
 
       -- TODO explore those functions
