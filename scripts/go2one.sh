@@ -114,16 +114,9 @@ native_install() {
         rm -rf $nvim_local_dir
     fi
 
-    git clone --quiet --depth 1 https://github.com/wbthomason/packer.nvim\
-     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
     script_dir=$(current_script_dir)
     repo_root_dir=$(dirname $script_dir)
     ln -s $repo_root_dir/nvim $HOME/.config/nvim
-
-    # run nvim in headless mode. Redirects output to /dev/null to avoid
-    # packer chicken-n-egg errors in the first run
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' &>/dev/null
     echo "Installed. Have fun!"
 }
 
