@@ -64,7 +64,6 @@ return {
       end
 
       map("n", "<leader>ff", builtin.find_files, silent)
-      map("n", "<leader>fp", telescope.extensions.projects.projects, silent)
       map("n", "<leader>fh", builtin.help_tags, silent)
       map("n", "<leader>fg", builtin.live_grep, silent)
       map("n", "<leader>fk", builtin.keymaps, silent)

@@ -42,6 +42,7 @@ map("n", "<leader>a", "ggVG$", silent)
 map("i", "<C-a>", "<ESC>ggvG$")
 map("v", "<silent><C-s>", ":sort<CR>", silent)
 map("n", "<leader>s", ":lua require'utils'.reload('go2one')<CR>")
+map("n", "<leader>fp", ":lua print(vim.api.nvim_buf_get_name(0))<CR>", silent)
 
 -- Terminal mappings
 map("t", "<C-n>", "<C-\\><C-n>")
