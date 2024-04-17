@@ -8,7 +8,7 @@ opt.relativenumber = true
 opt.cursorline = true
 opt.signcolumn = "auto:9" -- auto show the gutter with max size
 opt.wrap = false
-opt.clipboard = "unnamed" -- y yy d works with system clipboard
+opt.clipboard = "unnamedplus" -- y yy d works with system clipboard
 opt.hlsearch = false
 opt.laststatus = 3
 opt.wildignore:append { "*.bak", "*.pyc", "*.py~", "*.pdf", "*.so", "*.gif", "*.jpg", "*.flv", "*.class", "*.jar",
