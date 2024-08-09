@@ -52,7 +52,7 @@ return {
           },
         },
       }
-      -- telescope.load_extension("fzf")
+      telescope.load_extension("fzf")
       telescope.load_extension('lsp_handlers')
       telescope.load_extension('gh')
       telescope.load_extension('repo')
