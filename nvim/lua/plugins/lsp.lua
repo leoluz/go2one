@@ -152,6 +152,11 @@ return {
         settings = {
           yaml = {
             schemas = { kubernetes = "globPattern" },
+            format = {
+              enable = true,
+              singleQuote = true,
+              formatOnType = true,
+            },
           },
         },
       })

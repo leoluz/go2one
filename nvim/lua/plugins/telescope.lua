@@ -5,9 +5,16 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'gbrlsnchs/telescope-lsp-handlers.nvim',
-      'nvim-telescope/telescope-fzf-native.nvim',
       'nvim-telescope/telescope-github.nvim',
       'cljoly/telescope-repo.nvim',
+      -- 'nvim-telescope/telescope-fzf-native.nvim',
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        config = function()
+          require("telescope").load_extension("fzf")
+        end,
+      },
     },
     config = function()
       local telescope = require("telescope")
