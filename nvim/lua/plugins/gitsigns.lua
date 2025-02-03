@@ -31,14 +31,14 @@ return {
         -- Navigation
         map("n", "ghj", function()
           vim.schedule(function()
-            gs.next_hunk()
+            gs.nav_hunk("next", { target = "all" })
           end)
           return "<Ignore>"
         end, { expr = true, desc = "next hunk" })
 
         map("n", "ghk", function()
           vim.schedule(function()
-            gs.prev_hunk()
+            gs.nav_hunk("prev", { target = "all" })
           end)
           return "<Ignore>"
         end, { expr = true, desc = "previous hunk" })
@@ -50,6 +50,9 @@ return {
         end, { expr = false, desc = "blame line" })
         map('n', 'ghd', gs.diffthis, { expr = false, desc = "diff this" })
         map('n', 'ghu', gs.reset_hunk, { expr = false, desc = "reset hunk" })
+        -- map('n', 'gh1', gs.change_base('HEAD~1'), { expr = false, desc = "reset hunk" })
+        map('n', 'gh1', ':Gitsigns change_base ~1<CR>', { expr = false, desc = "reset hunk" })
+        map('n', 'gh0', gs.reset_base, { expr = false, desc = "reset hunk" })
       end,
     }
   end
