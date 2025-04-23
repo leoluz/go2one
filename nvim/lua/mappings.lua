@@ -3,6 +3,7 @@ local utils = require "utils"
 local map = utils.map
 local silent = { silent = true }
 local expr = { expr = true }
+local noremap = { remap = false }
 
 -- map leader key to space.
 vim.g.mapleader = " "
@@ -50,3 +51,14 @@ map("t", "<C-n>", "<C-\\><C-n>")
 map("n", "<leader>t",
   ":lua require'testo'.test_nearest()<CR>",
   silent)
+
+-- navigate next and previous diagnostic
+local goto_next = function()
+  vim.diagnostic.jump{count=1}
+end
+local goto_prev = function()
+  vim.diagnostic.jump{count=-1}
+end
+utils.map("n", "gn", goto_next, noremap)
+utils.map("n", "gp", goto_prev, noremap)
+

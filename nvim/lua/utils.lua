@@ -14,8 +14,8 @@ end
 -- auto_format_lsp will format current buffer if it has lsp client attached
 -- with 'document_formatting' capability
 function M.auto_format_lsp()
-  local id, client = next(vim.lsp.get_active_clients())
-  if id ~= nil and client.server_capabilities.documentFormattingProvider then
+  local id, client = next(vim.lsp.get_clients())
+  if id ~= nil and client ~= nil and client.server_capabilities.documentFormattingProvider then
     vim.lsp.buf.format()
   end
 end

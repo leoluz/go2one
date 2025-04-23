@@ -10,6 +10,25 @@ api.nvim_create_autocmd("BufWritePre", {
   callback = utils.auto_format_lsp,
 })
 
+api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local opt = { buffer = args.buf, remap = false }
+    local lspbuf = vim.lsp.buf
+    local builtin = require('telescope.builtin')
+    utils.map("n", "<leader>fs", builtin.lsp_dynamic_workspace_symbols, opt)
+    utils.map("n", "gr", builtin.lsp_references, opt)
+    utils.map("n", "gi", builtin.lsp_implementations, opt)
+    utils.map("n", "<leader>o", builtin.lsp_document_symbols, opt)
+    utils.map("n", "ga", lspbuf.code_action, opt)
+    utils.map("n", "gd", lspbuf.definition, opt)
+    utils.map("n", "gD", lspbuf.declaration, opt)
+    utils.map("n", "gt", vim.lsp.buf.type_definition, opt)
+
+    utils.map("n", "<Leader>rn", vim.lsp.buf.rename, opt)
+    utils.map("n", "K", vim.lsp.buf.hover, opt)
+  end
+})
+
 -- yaml configurations
 local bufferOpts = function()
   bo.tabstop = 2
