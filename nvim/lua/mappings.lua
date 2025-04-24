@@ -54,11 +54,10 @@ map("n", "<leader>t",
 
 -- navigate next and previous diagnostic
 local goto_next = function()
-  vim.diagnostic.jump{count=1}
+  vim.diagnostic.jump { count = 1, float = true }
 end
 local goto_prev = function()
-  vim.diagnostic.jump{count=-1}
+  vim.diagnostic.jump { count = -1, float = true }
 end
 utils.map("n", "gn", goto_next, noremap)
 utils.map("n", "gp", goto_prev, noremap)
-

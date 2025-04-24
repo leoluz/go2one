@@ -10,4 +10,7 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-vim.diagnostic.config({ virtual_lines = { current_line = true } })
+vim.diagnostic.config {
+  float = { border = "rounded" },
+  underline = false,
+}

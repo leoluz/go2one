@@ -51,7 +51,7 @@ This method will create two entries in your filesystem:
 
 **Pre-reqs**
 
-- [Neovim][20]: 0.5.1 
+- [Neovim][20]: 0.11.0+
 - [Go][15]: SDK for Go
 - [delve][16]: for debugging Go projects
 - [gopls][17]: LSP server for Go
