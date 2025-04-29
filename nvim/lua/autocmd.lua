@@ -62,20 +62,19 @@ api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
   callback = function() vim.wo.cursorcolumn = false end,
 })
 
-
 -- golang configurations
-local goOpts = function()
-  bo.tabstop = 4
-  bo.softtabstop = 4
-  bo.shiftwidth = 4
-  bo.expandtab = false
-end
-api.nvim_create_augroup("golang", { clear = true })
-api.nvim_create_autocmd("FileType", {
-  group = "golang",
-  pattern = "go",
-  callback = goOpts,
-})
+-- local goOpts = function()
+--   bo.tabstop = 4
+--   bo.softtabstop = 4
+--   bo.shiftwidth = 4
+--   -- bo.expandtab = false
+-- end
+-- api.nvim_create_augroup("golang", { clear = true })
+-- api.nvim_create_autocmd("FileType", {
+--   group = "golang",
+--   pattern = "go",
+--   callback = goOpts,
+-- })
 
 
 -- markdown configurations

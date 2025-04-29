@@ -47,7 +47,7 @@ return {
         vim.lsp.config('yamlls', {
           settings = {
             yaml = {
-              schemas = { kubernetes = "globPattern" },
+              schemas = { kubernetes = "*.yaml" },
               format = {
                 enable = true,
                 singleQuote = true,

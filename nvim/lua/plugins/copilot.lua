@@ -18,7 +18,28 @@ return {
     },
   },
   keys = {
-    { "<leader>cc", "<cmd>CopilotChat<cr>",          mode = "n", desc = "[C]opilot [C]hat" },
+    {
+      "<leader>cc",
+      function()
+        return require("CopilotChat").toggle()
+      end,
+      mode = { "n", "v" },
+      desc = "[C]opilot [C]hat Toggle",
+    },
+    {
+      "<leader>cq",
+      function()
+        vim.ui.input({
+          prompt = "Quick Chat: ",
+        }, function(input)
+          if input ~= "" then
+            require("CopilotChat").ask(input)
+          end
+        end)
+      end,
+      mode = { "n", "v" },
+      desc = "[C]opilot [Q]uick Chat",
+    },
     { "<leader>cx", "<cmd>CopilotChatExplain<cr>",   mode = "v", desc = "[C]opilot E[x]plain Code" },
     { "<leader>cr", "<cmd>CopilotChatReview<cr>",    mode = "v", desc = "[C]opilot [R]eview Code" },
     { "<leader>cf", "<cmd>CopilotChatFix<cr>",       mode = "v", desc = "[C]opilot [F]ix Code" },
@@ -31,5 +52,5 @@ return {
     { "<leader>cp", "<cmd>CopilotChatSpelling<cr>",  mode = "v", desc = "[C]opilot Check S[p]elling" },
     { "<leader>cw", "<cmd>CopilotChatWording<cr>",   mode = "v", desc = "[C]opilot Improve [W]ording" },
     { "<leader>ci", "<cmd>CopilotChatConcise<cr>",   mode = "v", desc = "[C]opilot Make Text Conc[i]se" },
-  }
+  },
 }
