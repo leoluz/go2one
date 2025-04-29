@@ -11,8 +11,8 @@ api.nvim_create_autocmd("BufWritePre", {
 })
 
 api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local opt = { buffer = args.buf, remap = false }
+  callback = function(ev)
+    local opt = { buffer = ev.buf, remap = false }
     local lspbuf = vim.lsp.buf
     local builtin = require('telescope.builtin')
     utils.map("n", "<leader>fs", builtin.lsp_dynamic_workspace_symbols, opt)
