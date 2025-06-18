@@ -17,6 +17,14 @@ return {
       Concise = "Rewrite the text to make it more concise.",
     },
   },
+  init = function()
+    local map = require("utils").map
+    map('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
+      expr = true,
+      replace_keycodes = false
+    })
+    vim.g.copilot_no_tab_map = true
+  end,
   keys = {
     {
       "<leader>cc",
