@@ -18,5 +18,15 @@ local opts = {
     path = "~/git",
     fallback = true,
   },
+  concurrency = 3,
+  -- git = {
+  --   cooldown = 1,
+  --   throttle = {
+  --     enabled = true, -- not enabled by default
+  --     -- max 2 ops every 5 seconds
+  --     rate = 3,
+  --     duration = 5 * 1000, -- in ms
+  --   },
+  -- },
 }
 require("lazy").setup("plugins", opts)

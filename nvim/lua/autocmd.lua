@@ -2,16 +2,16 @@ local api = vim.api
 local bo = vim.bo
 local utils = require("utils")
 
--- will format file before saving based on attached lsp capabilities
-api.nvim_create_augroup("lsp", { clear = true })
-api.nvim_create_autocmd("BufWritePre", {
-  group = "lsp",
-  pattern = "*",
-  callback = utils.auto_format_lsp,
-})
-
 api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp", { clear = true }),
   callback = function(ev)
+    -- will format file before saving
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = ev.buf,
+      callback = function()
+        vim.lsp.buf.format { async = false, id = ev.data.client_id }
+      end,
+    })
     local opt = { buffer = ev.buf, remap = false }
     local lspbuf = vim.lsp.buf
     local builtin = require('telescope.builtin')
