@@ -19,9 +19,9 @@ return {
       local neotest_golang_opts = {
         -- runner = "go",
         runner = "gotestsum", -- Optional, but recommended
-        go_test_args = function()
-          return { "-count=1" }
-        end,
+        -- go_test_args = function()
+        --   return { "-count=1" }
+        -- end,
       } -- Specify custom configuration
       require("neotest").setup({
         adapters = {
