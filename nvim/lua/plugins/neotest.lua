@@ -17,12 +17,8 @@ return {
     },
     config = function()
       local neotest_golang_opts = {
-        -- runner = "go",
-        runner = "gotestsum", -- Optional, but recommended
-        -- go_test_args = function()
-        --   return { "-count=1" }
-        -- end,
-      } -- Specify custom configuration
+        runner = "gotestsum",
+      }
       require("neotest").setup({
         adapters = {
           require("neotest-golang")(neotest_golang_opts),
@@ -38,6 +34,7 @@ return {
       { "<leader>to", function() require("neotest").summary.toggle() end,                                  desc = "[t]est [s]ummary" },
       { "<leader>tr", function() require("neotest").output.open({ enter = false, auto_close = true }) end, desc = "[t]est [r]esult" },
       { "<leader>tp", function() require("neotest").output_panel.toggle() end,                             desc = "[t]est output [p]anel" },
+      { "<leader>tc", function() require("neotest").output_panel.clear() end,                              desc = "[t]est output [c]lear" },
       { "<leader>tS", function() require("neotest").run.stop() end,                                        desc = "[t]est [S]top" },
       { "<leader>td", function() require("neotest").run.run({ suite = false, strategy = "dap" }) end,      desc = "Debug nearest test" },
     },
