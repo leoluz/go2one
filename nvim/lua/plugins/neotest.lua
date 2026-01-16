@@ -18,6 +18,7 @@ return {
     config = function()
       local neotest_golang_opts = {
         runner = "gotestsum",
+        warn_test_name_dupes = false,
       }
       require("neotest").setup({
         adapters = {
