@@ -18,10 +18,14 @@ return {
       opts = {
         strategies = {
           chat = {
-            adapter = "copilot",
+            -- adapter = "copilot",
+            name = "copilot",
+            -- model = "Google Gemini 2.5 Pro",
+            model = "openai/gpt-5-chat",
+            -- model = "Anthropic Claude Opus 4.5",
             -- adapter = {
             --   name = "copilot",
-            --   -- model = "gpt-4.1-2025-04-14",
+            --   model = "Google Gemini 2.5 Pro",
             -- },
           },
           inline = {
