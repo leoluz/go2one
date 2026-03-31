@@ -14,9 +14,9 @@ return {
       dependencies = { "folke/snacks.nvim" },
       config = true,
       keys = {
+        { "<C-,>",      "<cmd>ClaudeCodeFocus<cr>",       desc = "Claude Code",        mode = { "n", "x" } },
         { "<leader>c",  nil,                              desc = "Claude Code" },
         { "<leader>cc", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
-        { "<leader>cf", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
         { "<leader>cr", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
         { "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
         { "<leader>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
@@ -31,6 +31,30 @@ return {
         -- Diff management
         { "<leader>ca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
         { "<leader>cd", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
+      },
+      opts = {
+        terminal = {
+          snacks_win_opts = {
+            position = "float",
+            width = 0.8,
+            height = 0.8,
+            border = "rounded",
+            keys = {
+              claude_hide = { "<C-,>", function(self) self:hide() end, mode = "t", desc = "Hide" },
+            },
+          },
+        },
+        diff_opts = {
+          layout = "vertical",         -- "vertical" or "horizontal"
+          open_in_new_tab = false,
+          keep_terminal_focus = false, -- If true, moves focus back to terminal after diff opens
+          hide_terminal_in_new_tab = true,
+          -- on_new_file_reject = "keep_empty", -- "keep_empty" or "close_window"
+
+          -- Legacy aliases (still supported):
+          -- vertical_split = true,
+          -- open_in_current_tab = true,
+        },
       },
     },
     {
