@@ -39,6 +39,7 @@ return {
             width = 0.8,
             height = 0.8,
             border = "rounded",
+            auto_close = true,
             keys = {
               claude_hide = { "<C-,>", function(self) self:hide() end, mode = "t", desc = "Hide" },
             },
@@ -46,14 +47,10 @@ return {
         },
         diff_opts = {
           layout = "vertical",         -- "vertical" or "horizontal"
-          open_in_new_tab = false,
+          open_in_new_tab = true,
           keep_terminal_focus = false, -- If true, moves focus back to terminal after diff opens
           hide_terminal_in_new_tab = true,
           -- on_new_file_reject = "keep_empty", -- "keep_empty" or "close_window"
-
-          -- Legacy aliases (still supported):
-          -- vertical_split = true,
-          -- open_in_current_tab = true,
         },
       },
     },
