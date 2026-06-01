@@ -65,7 +65,6 @@ return {
       telescope.load_extension('gh')
       telescope.load_extension('repo')
       telescope.load_extension("advanced_git_search")
-      telescope.load_extension('projects')
 
       local function git_branches()
         builtin.git_branches({ show_remote_tracking_branches = false })
