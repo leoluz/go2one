@@ -29,7 +29,13 @@ return {
 
     signature = { enabled = true },
 
-    completion = { documentation = { auto_show = true } },
+    completion = {
+      menu = { border = 'rounded' },
+      documentation = {
+        auto_show = true,
+        window = { border = 'rounded' },
+      },
+    },
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`

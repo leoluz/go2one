@@ -44,3 +44,4 @@ opt.background  = "dark"
 opt.listchars:append({ trail = '·', eol = '↩', tab = '› ' })
 opt.undofile = true
 opt.undodir = "/tmp/nvim/undo"
+opt.winborder = "rounded" -- default border for all floating windows
