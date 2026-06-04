@@ -8,6 +8,22 @@ return {
       end
     },
     {
+      -- auto-install configured mason packages
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      dependencies = { 'williamboman/mason.nvim' },
+      config = function()
+        require('mason-tool-installer').setup({
+          ensure_installed = {
+            'lua-language-server',
+            'gopls',
+            'bash-language-server',
+            'yaml-language-server',
+            'typescript-language-server',
+          },
+        })
+      end
+    },
+    {
       -- configure Lua development
       "folke/lazydev.nvim",
       ft = "lua",
@@ -42,6 +58,10 @@ return {
 
         -- Bash LSP Setup
         vim.lsp.enable('bashls')
+
+        -- TypeScript / JavaScript LSP Setup
+        -- mason package: typescript-language-server  (:MasonInstall typescript-language-server)
+        vim.lsp.enable('ts_ls')
 
         --- YAML LSP Setup
         vim.lsp.config('yamlls', {
