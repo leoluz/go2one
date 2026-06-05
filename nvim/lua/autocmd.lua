@@ -62,6 +62,19 @@ api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
   callback = function() vim.wo.cursorcolumn = false end,
 })
 
+-- typescript / javascript configurations
+api.nvim_create_augroup("typescript", { clear = true })
+api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  group = "typescript",
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs", "*.cjs" },
+  callback = bufferOpts,
+})
+api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
+  group = "typescript",
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs", "*.cjs" },
+  callback = function() vim.wo.cursorcolumn = false end,
+})
+
 -- golang configurations
 -- local goOpts = function()
 --   bo.tabstop = 4

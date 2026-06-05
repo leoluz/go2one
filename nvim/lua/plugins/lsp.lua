@@ -61,6 +61,8 @@ return {
 
         -- TypeScript / JavaScript LSP Setup
         -- mason package: typescript-language-server  (:MasonInstall typescript-language-server)
+        -- note: indentation is driven by buffer-local shiftwidth/expandtab
+        -- (set in autocmd.lua), which vim.lsp.buf.format() sends to the server.
         vim.lsp.enable('ts_ls')
 
         --- YAML LSP Setup
