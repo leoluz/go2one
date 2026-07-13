@@ -40,12 +40,6 @@ return {
                 symlink = "",
                 symlink_open = "",
               },
-              -- lsp= {
-              --   hint= "",
-              --   info= "",
-              --   warning= "",
-              --   error= "",
-              -- }
             }
           }
         }
