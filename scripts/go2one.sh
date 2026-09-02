@@ -58,7 +58,7 @@ verify_env() {
 }
 
 install() {
-    mode=${2:-isolated}
+    mode=${2:-native}
 
     read -p "This will install go2one in mode '$mode'. Proceed? [Yy]" -n 1 -r
     echo ""
