@@ -30,22 +30,12 @@
           curl
         ];
 
-        # A standard $XDG_CONFIG_HOME containing this repo's nvim/ as
-        # $XDG_CONFIG_HOME/nvim - the same layout Neovim expects natively,
-        # just redirected so it doesn't overwrite the user's own
-        # ~/.config/nvim.
-        xdgConfigHome = pkgs.runCommand "nvim-xdg-config-home" { } ''
-          mkdir -p $out
-          cp -r ${self}/nvim $out/nvim
-        '';
-
         nvim = pkgs.symlinkJoin {
           name = "nvim";
           paths = [ pkgs.neovim-unwrapped ];
           buildInputs = [ pkgs.makeWrapper ];
           postBuild = ''
             wrapProgram $out/bin/nvim \
-              --set XDG_CONFIG_HOME ${xdgConfigHome} \
               --prefix PATH : ${pkgs.lib.makeBinPath runtimeDeps}
           '';
         };
