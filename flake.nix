@@ -11,7 +11,7 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
-        # Tools the config's plugins shell out to (go2one.sh's verify_env
+        # Tools the config's plugins shell out to (scripts/install.sh's verify_env
         # checks for most of these already; mason.nvim needs unzip/gzip/curl
         # to unpack the LSP servers it installs at runtime).
         runtimeDeps = with pkgs; [
