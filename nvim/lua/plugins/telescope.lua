@@ -66,6 +66,10 @@ return {
       telescope.load_extension('repo')
       telescope.load_extension("advanced_git_search")
 
+      -- registers the :GhReviewedPRs command; the actual gh/network calls only
+      -- happen when the command or the <leader>gr mapping below is invoked.
+      require("gh_reviews")
+
       local function git_branches()
         builtin.git_branches({ show_remote_tracking_branches = false })
       end
@@ -82,6 +86,9 @@ return {
       map("n", "<leader>gl", builtin.git_commits, silent)
       map("n", "<leader>gb", git_branches, silent)
       map("n", "<leader>gs", builtin.git_status, silent)
+      -- PRs you've reviewed on GitHub for the repo in cwd (see nvim/lua/gh_reviews.lua for usage/caveats)
+      map("n", "<leader>gr", ":lua require('gh_reviews').reviewed_prs()<CR>",
+        vim.tbl_extend("force", silent, { desc = "Telescope: PRs I've reviewed (GhReviewedPRs)" }))
       -- list of all previous commits. Grep commit content
       map("n", "<leader>ghh", telescope.extensions.advanced_git_search.search_log_content, silent)
       -- list of git commits that changed the current file. Grep commit content
