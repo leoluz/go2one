@@ -27,8 +27,8 @@ return {
         terminal = {
           snacks_win_opts = {
             position = "float",
-            width = 0.8,
-            height = 0.8,
+            width = 0.95,
+            height = 0.95,
             border = "rounded",
             auto_close = true,
             keys = {
