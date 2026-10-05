@@ -55,5 +55,49 @@ return {
         map('n', 'gh0', gs.reset_base, { expr = false, desc = "reset hunk" })
       end,
     }
+
+    -- On every branch switch, diff against the merge base with the upstream
+    -- default branch so the signs show only what the branch itself changed.
+    local default_branches = { master = true, main = true }
+    local base_refs = { "upstream/master", "upstream/main", "origin/master", "origin/main" }
+    local last_head = {}
+
+    local function git(root, args)
+      local res = vim.system(vim.list_extend({ "git", "-C", root }, args), { text = true }):wait()
+      if res.code ~= 0 then
+        return nil
+      end
+      return vim.trim(res.stdout)
+    end
+
+    vim.api.nvim_create_autocmd("User", {
+      group = vim.api.nvim_create_augroup("gitsigns_branch_base", { clear = true }),
+      pattern = "GitSignsUpdate",
+      callback = function(ev)
+        local buf = ev.data and ev.data.buffer
+        local status = buf and vim.b[buf].gitsigns_status_dict
+        if not status or not status.root or not status.head then
+          return
+        end
+        if last_head[status.root] == status.head then
+          return
+        end
+        last_head[status.root] = status.head
+
+        if default_branches[status.head] then
+          gitsigns.reset_base(true)
+          return
+        end
+        for _, ref in ipairs(base_refs) do
+          if git(status.root, { "rev-parse", "--verify", "--quiet", ref }) then
+            local base = git(status.root, { "merge-base", "HEAD", ref })
+            if base then
+              gitsigns.change_base(base, true)
+            end
+            return
+          end
+        end
+      end,
+    })
   end
 }
