@@ -69,6 +69,8 @@ return {
       -- registers the :GhReviewedPRs command; the actual gh/network calls only
       -- happen when the command or the <leader>gr mapping below is invoked.
       require("gh_reviews")
+      -- registers :ReleaseDiff (see nvim/lua/release_diff.lua)
+      require("release_diff")
 
       local function git_branches()
         builtin.git_branches({ show_remote_tracking_branches = false })
@@ -89,6 +91,9 @@ return {
       -- PRs you've reviewed on GitHub for the repo in cwd (see nvim/lua/gh_reviews.lua for usage/caveats)
       map("n", "<leader>gr", ":lua require('gh_reviews').reviewed_prs()<CR>",
         vim.tbl_extend("force", silent, { desc = "Telescope: PRs I've reviewed (GhReviewedPRs)" }))
+      -- unreleased commits on a release branch, opened in diffview (see nvim/lua/release_diff.lua)
+      map("n", "<leader>gR", function() require("release_diff").open() end,
+        vim.tbl_extend("force", silent, { desc = "Telescope: unreleased commits on a release branch (ReleaseDiff)" }))
       -- list of all previous commits. Grep commit content
       map("n", "<leader>ghh", telescope.extensions.advanced_git_search.search_log_content, silent)
       -- list of git commits that changed the current file. Grep commit content
