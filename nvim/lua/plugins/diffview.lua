@@ -11,6 +11,12 @@ return {
     local actions = require("diffview.config").actions
     require("diffview").setup({
       enhanced_diff_hl = true,
+      hooks = {
+        -- never fold unchanged lines in diff windows
+        diff_buf_win_enter = function(_, winid)
+          vim.wo[winid].foldenable = false
+        end,
+      },
       view = {
         default = {
           layout = "diff2_vertical",
