@@ -65,6 +65,11 @@ return {
         -- (set in autocmd.lua), which vim.lsp.buf.format() sends to the server.
         vim.lsp.enable('ts_ls')
 
+        -- Tiltfile LSP Setup
+        -- uses the `tilt` binary from PATH (e.g. a project's Nix dev shell), so it
+        -- only starts where tilt is available
+        vim.lsp.enable('tilt_ls')
+
         --- YAML LSP Setup
         vim.lsp.config('yamlls', {
           settings = {
