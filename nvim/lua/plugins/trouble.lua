@@ -32,13 +32,16 @@ return {
             groups = {},
             sort = {},
             format = "{kind_icon} {symbol.name} {symbol.detail:Comment} {pos}",
+            -- :Trouble call_tree include_tests=true to also show callers in _test.go files
+            include_tests = false,
           },
         },
       },
       -- Builds the tree of callers of the function under the cursor by calling
       -- callHierarchy/incomingCalls recursively. Each function is expanded only
       -- once; later occurrences are shown without their callers.
-      get = function(cb)
+      get = function(cb, ctx)
+        local include_tests = ctx.opts.include_tests
         local buf = vim.api.nvim_get_current_buf()
         local win = vim.api.nvim_get_current_win()
         local client = vim.lsp.get_clients({ bufnr = buf, method = "callHierarchy/incomingCalls" })[1]
@@ -81,15 +84,17 @@ return {
             requests = requests + 1
             client:request("callHierarchy/incomingCalls", { item = item }, function(_, calls)
               for _, call in ipairs(calls or {}) do
-                local child = vim.deepcopy(call.from)
-                -- jump to the call site instead of the caller's definition
-                child.location = {
-                  uri = call.from.uri,
-                  range = (call.fromRanges or {})[1] or call.from.selectionRange,
-                }
-                table.insert(node.children, child)
-                if not seen[key(call.from)] then
-                  expand(child, call.from, depth + 1)
+                if include_tests or not call.from.uri:match("_test%.go$") then
+                  local child = vim.deepcopy(call.from)
+                  -- jump to the call site instead of the caller's definition
+                  child.location = {
+                    uri = call.from.uri,
+                    range = (call.fromRanges or {})[1] or call.from.selectionRange,
+                  }
+                  table.insert(node.children, child)
+                  if not seen[key(call.from)] then
+                    expand(child, call.from, depth + 1)
+                  end
                 end
               end
               done()
