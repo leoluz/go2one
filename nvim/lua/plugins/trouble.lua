@@ -13,6 +13,8 @@ return {
 
     local max_depth = 15
     local max_requests = 500
+    local building = false -- a tree build is in flight
+    local ready = nil ---@type trouble.Item[]? finished tree, consumed by the next get()
 
     -- unique key for a CallHierarchyItem
     local function key(item)
@@ -34,25 +36,53 @@ return {
             format = "{kind_icon} {symbol.name} {symbol.detail:Comment} {pos}",
             -- :Trouble call_tree include_tests=true to also show callers in _test.go files
             include_tests = false,
+            -- the first fetch is always empty while the tree builds in the background
+            warn_no_results = false,
           },
         },
       },
       -- Builds the tree of callers of the function under the cursor by calling
       -- callHierarchy/incomingCalls recursively. Each function is expanded only
       -- once; later occurrences are shown without their callers.
+      --
+      -- Trouble aborts a source fetch after 2s (view/section.lua), which large
+      -- trees easily exceed. So the first get() starts the build in the
+      -- background and returns nothing (silently, warn_no_results=false); when
+      -- the build finishes, trouble is opened again and get() returns the result.
       get = function(cb, ctx)
+        if ready then
+          local items = ready
+          ready = nil
+          return cb(items)
+        end
+        cb({})
+        if building then
+          return
+        end
+
         local include_tests = ctx.opts.include_tests
         local buf = vim.api.nvim_get_current_buf()
         local win = vim.api.nvim_get_current_win()
         local client = vim.lsp.get_clients({ bufnr = buf, method = "callHierarchy/incomingCalls" })[1]
         if not client then
-          return cb({})
+          return vim.notify("call_tree: no LSP client supports call hierarchy", vim.log.levels.WARN)
         end
 
+        local function finish(items)
+          building = false
+          if #items == 0 then
+            return vim.notify("call_tree: no incoming calls found", vim.log.levels.INFO)
+          end
+          ready = items
+          require("trouble").open({ mode = "call_tree", include_tests = include_tests, focus = ctx.opts.focus })
+        end
+
+        building = true
+        vim.notify("call_tree: building incoming call tree...", vim.log.levels.INFO)
         local params = vim.lsp.util.make_position_params(win, client.offset_encoding)
         client:request("textDocument/prepareCallHierarchy", params, function(err, roots)
           if err or not roots or #roots == 0 then
-            return cb({})
+            return finish({})
           end
 
           local seen = {}
@@ -70,7 +100,7 @@ return {
             for i, item in ipairs(items) do
               item.id = item.id .. "|" .. i
             end
-            cb(items)
+            finish(items)
           end
 
           -- node is the tree entry, item the clean CallHierarchyItem sent to the server
