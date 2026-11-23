@@ -15,6 +15,46 @@ local function claude_restart(args)
   vim.cmd("ClaudeCode " .. args)
 end
 
+local function switch_to_previous_buffer()
+  if vim.fn.buflisted(vim.fn.bufnr("#")) == 1 then
+    vim.cmd("buffer #")
+  else
+    vim.cmd("bprevious")
+  end
+end
+
+-- Show the Claude terminal buffer in the current window instead of the float.
+-- It's the same session the <C-,> float uses; starts one if none is running.
+local function claude_in_current_window()
+  local term = require("claudecode.terminal")
+  local target_win = vim.api.nvim_get_current_win()
+  local buf = term.get_active_terminal_bufnr()
+  if not buf then
+    vim.cmd("ClaudeCodeOpen")
+    vim.wait(2000, function() return term.get_active_terminal_bufnr() ~= nil end, 10)
+    buf = term.get_active_terminal_bufnr()
+    if not buf then
+      vim.notify("Claude Code terminal did not start", vim.log.levels.ERROR)
+      return
+    end
+  end
+  -- Hide the float if it's showing, so the buffer isn't displayed twice.
+  -- ClaudeCodeFocus from inside the float hides it (and its backdrop).
+  for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+    local cfg = vim.api.nvim_win_get_config(win)
+    if cfg.relative ~= "" and not cfg.hide then
+      vim.api.nvim_set_current_win(win)
+      vim.cmd("ClaudeCodeFocus")
+    end
+  end
+  if vim.api.nvim_win_get_config(target_win).relative ~= "" then
+    target_win = vim.fn.win_getid(vim.fn.winnr("#"))
+  end
+  vim.api.nvim_set_current_win(target_win)
+  vim.api.nvim_win_set_buf(target_win, buf)
+  vim.cmd("startinsert")
+end
+
 return {
   {
     {
@@ -24,7 +64,7 @@ return {
       keys = {
         { "<C-,>",      "<cmd>ClaudeCodeFocus<cr>", desc = "Claude Code",  mode = { "n", "x" } },
         { "<leader>c",  nil,                        desc = "Claude Code" },
-        { "<leader>cc", "<cmd>ClaudeCode<cr>",      desc = "Toggle Claude" },
+        { "<leader>cc", claude_in_current_window,  desc = "Claude in current window" },
         -- On-call modes. The mode files come from dot_files_macos (modules/claude-oncall.nix).
         {
           "<leader>cr",
@@ -59,7 +99,21 @@ return {
             border = "rounded",
             auto_close = true,
             keys = {
-              claude_hide = { "<C-,>", function(self) self:hide() end, mode = "t", desc = "Hide" },
+              -- In the float: hide it. In a standalone buffer (<leader>cc):
+              -- go back to the previous buffer, keeping Claude alive.
+              claude_hide = {
+                "<C-,>",
+                function(self)
+                  if vim.api.nvim_win_get_config(0).relative ~= "" then
+                    self:hide()
+                  else
+                    vim.cmd("stopinsert")
+                    switch_to_previous_buffer()
+                  end
+                end,
+                mode = "t",
+                desc = "Hide",
+              },
             },
           },
         },
