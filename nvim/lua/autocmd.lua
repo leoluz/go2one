@@ -111,6 +111,18 @@ api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
   callback = markdownOut,
 })
 
+-- hide listchars (eol, trail, tab), line numbers and signs in terminal buffers
+api.nvim_create_augroup("term", { clear = true })
+api.nvim_create_autocmd("TermOpen", {
+  group = "term",
+  callback = function()
+    vim.opt_local.list = false
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = "no"
+  end,
+})
+
 -- -- term configurations
 -- vim.cmd[[
 -- augroup term
