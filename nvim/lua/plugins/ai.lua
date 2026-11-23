@@ -8,7 +8,25 @@ return {
         { "<C-,>",      "<cmd>ClaudeCodeFocus<cr>",       desc = "Claude Code",        mode = { "n", "x" } },
         { "<leader>c",  nil,                              desc = "Claude Code" },
         { "<leader>cc", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
-        { "<leader>cr", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
+        { "<leader>cR", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
+        -- On-call modes. The mode files come from dot_files_macos (modules/claude-oncall.nix).
+        -- claudecode.nvim reuses a running terminal and ignores new args, so close it first.
+        {
+          "<leader>cr",
+          function()
+            require("claudecode.terminal").close()
+            vim.cmd("ClaudeCode --settings ~/.claude/oncall-ro.json")
+          end,
+          desc = "On-call (read-only)",
+        },
+        {
+          "<leader>cw",
+          function()
+            require("claudecode.terminal").close()
+            vim.cmd("ClaudeCode --settings ~/.claude/oncall-rw.json")
+          end,
+          desc = "On-call (write access)",
+        },
         { "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
         { "<leader>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
         { "<leader>cb", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
