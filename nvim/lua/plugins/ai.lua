@@ -1,3 +1,16 @@
+-- Kill the running Claude terminal (if any) and start a new one with args.
+-- close() only kills the job; the plugin forgets the terminal in its TermClose
+-- handler, which runs later. Opening before that reuses the dying terminal
+-- (and its late TermClose clears the new one), so wait for it first.
+local function claude_restart(args)
+  local term = require("claudecode.terminal")
+  if term.get_active_terminal_bufnr() then
+    term.close()
+    vim.wait(2000, function() return term.get_active_terminal_bufnr() == nil end, 10)
+  end
+  vim.cmd("ClaudeCode " .. args)
+end
+
 return {
   {
     {
@@ -5,26 +18,19 @@ return {
       dependencies = { "folke/snacks.nvim" },
       config = true,
       keys = {
-        { "<C-,>",      "<cmd>ClaudeCodeFocus<cr>",       desc = "Claude Code",        mode = { "n", "x" } },
-        { "<leader>c",  nil,                              desc = "Claude Code" },
-        { "<leader>cc", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
-        { "<leader>cR", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
+        { "<C-,>",      "<cmd>ClaudeCodeFocus<cr>", desc = "Claude Code",  mode = { "n", "x" } },
+        { "<leader>c",  nil,                        desc = "Claude Code" },
+        { "<leader>cc", "<cmd>ClaudeCode<cr>",      desc = "Toggle Claude" },
         -- On-call modes. The mode files come from dot_files_macos (modules/claude-oncall.nix).
         -- claudecode.nvim reuses a running terminal and ignores new args, so close it first.
         {
           "<leader>cr",
-          function()
-            require("claudecode.terminal").close()
-            vim.cmd("ClaudeCode --settings ~/.claude/oncall-ro.json")
-          end,
+          function() claude_restart("--settings ~/.claude/oncall-ro.json") end,
           desc = "On-call (read-only)",
         },
         {
           "<leader>cw",
-          function()
-            require("claudecode.terminal").close()
-            vim.cmd("ClaudeCode --settings ~/.claude/oncall-rw.json")
-          end,
+          function() claude_restart("--settings ~/.claude/oncall-rw.json") end,
           desc = "On-call (write access)",
         },
         { "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
